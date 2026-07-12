@@ -1,0 +1,14 @@
+{
+  "name": "國語文課程地圖 · 小一到高三",
+  "short_name": "國語文",
+  "description": "12 年級國語文課程大綱、教師教案與學生自學任務、8 堂四小時特色課程、寫作教室、語文常識庫、隨堂測驗與考卷產生器。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F7F4ED",
+  "theme_color": "#9E2B25",
+  "lang": "zh-Hant",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

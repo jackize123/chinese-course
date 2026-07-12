@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>國語文課程地圖 · 小一到高三 ＋ 四小時特色課程</title>
+<meta name="description" content="國小一年級到高中三年級的完整國語文課程：12年級課程大綱、教師教案與學生自學任務、8堂四小時特色課程、寫作教室、語文常識庫、隨堂測驗與考卷產生器。">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#9E2B25">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="國語文">
+</head>
+<body data-role="student">
+<style>
+  :root{
+    --paper:#F7F4ED; --surface:#FFFFFF; --card:#FCFAF4;
+    --ink:#20211F; --ink-soft:#4B4E48; --muted:#83867D;
+    --line:#E3DED1; --line-soft:#EFEBE0;
+    --red:#9E2B25; --red-deep:#7A1F1A; --red-tint:#F5E6E3;
+    --jade:#3F6B52; --jade-tint:#E4EFE7;
+    --gold:#A8791C; --gold-tint:#F7EDD8;
+    --good:#3F6B52; --shadow:0 1px 2px rgba(32,33,31,.04),0 8px 24px rgba(32,33,31,.07);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#141413; --surface:#1C1D1B; --card:#1F211E;
+      --ink:#EDE7DA; --ink-soft:#B7B9B0; --muted:#83867D;
+      --line:#2E302C; --line-soft:#262825;
+      --red:#D9736B; --red-deep:#E8908A; --red-tint:#33201E;
+      --jade:#6FB48C; --jade-tint:#1B2A22;
+      --gold:#D6A950; --gold-tint:#2C2413;
+      --good:#6FB48C; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#F7F4ED; --surface:#FFFFFF; --card:#FCFAF4;
+    --ink:#20211F; --ink-soft:#4B4E48; --muted:#83867D;
+    --line:#E3DED1; --line-soft:#EFEBE0;
+    --red:#9E2B25; --red-deep:#7A1F1A; --red-tint:#F5E6E3;
+    --jade:#3F6B52; --jade-tint:#E4EFE7;
+    --gold:#A8791C; --gold-tint:#F7EDD8;
+    --good:#3F6B52;
+  }
+  :root[data-theme="dark"]{
+    --paper:#141413; --surface:#1C1D1B; --card:#1F211E;
+    --ink:#EDE7DA; --ink-soft:#B7B9B0; --muted:#83867D;
+    --line:#2E302C; --line-soft:#262825;
+    --red:#D9736B; --red-deep:#E8908A; --red-tint:#33201E;
+    --jade:#6FB48C; --jade-tint:#1B2A22;
+    --gold:#D6A950; --gold-tint:#2C2413;
+    --good:#6FB48C;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI","Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;
+    line-height:1.75;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 18px 90px}
+  h1,h2,h3,h4{line-height:1.35;margin:0}
+  a{color:var(--red);text-underline-offset:3px}
+  .sub{color:var(--ink-soft)}
+  .muted{color:var(--muted);font-size:14px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .navin{max-width:1020px;margin:0 auto;padding:8px 12px;display:flex;gap:4px;align-items:center;overflow-x:auto}
+  .navin a{white-space:nowrap;padding:7px 11px;border-radius:9px;text-decoration:none;color:var(--ink-soft);font-size:14px;font-weight:600}
+  .navin a:hover{background:var(--red-tint);color:var(--red)}
+  .brand{font-weight:800;color:var(--ink);padding-right:6px;letter-spacing:.02em}
+
+  /* hero */
+  .hero{padding:38px 0 22px;border-bottom:1px solid var(--line-soft)}
+  .hero h1{font-size:30px;letter-spacing:.01em}
+  .hero p{margin:10px 0 0;color:var(--ink-soft);max-width:62ch}
+  .seal{display:inline-block;background:var(--red);color:#fff;font-weight:700;font-size:12px;
+    padding:3px 10px;border-radius:999px;letter-spacing:.08em;margin-bottom:12px}
+
+  /* role switch */
+  .roles{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;align-items:center}
+  .rbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer;font-size:14px}
+  .rbtn.on{background:var(--red);border-color:var(--red);color:#fff}
+  .rhint{font-size:13px;color:var(--muted)}
+
+  section{padding:34px 0;border-bottom:1px solid var(--line-soft);scroll-margin-top:58px}
+  section>h2{font-size:22px;display:flex;align-items:center;gap:9px}
+  section>h2 .no{font-size:12px;color:var(--red);border:1px solid var(--red);border-radius:6px;padding:1px 6px;font-weight:700}
+  section>p.lead{margin:8px 0 20px;color:var(--ink-soft)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+
+  /* stage map */
+  .stage{border-left:3px solid var(--red);padding-left:14px;margin-bottom:22px}
+  .stage h3{font-size:17px}
+  .stage .years{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .ychip{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;
+    cursor:pointer;font-size:14px;font-weight:600;color:var(--ink-soft);display:flex;gap:7px;align-items:center}
+  .ychip:hover{border-color:var(--red);color:var(--red)}
+  .ychip .pct{font-size:11px;color:var(--muted);font-weight:600}
+  .ychip.done{border-color:var(--good);color:var(--good)}
+
+  /* grade detail */
+  .gpick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .gpick button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600;cursor:pointer}
+  .gpick button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .bar{height:7px;border-radius:99px;background:var(--line-soft);overflow:hidden;margin:10px 0 0}
+  .bar>i{display:block;height:100%;background:var(--good);width:0;transition:width .3s}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;
+    background:var(--gold-tint);color:var(--gold);margin-right:6px}
+  .pill.jade{background:var(--jade-tint);color:var(--jade)}
+  .pill.red{background:var(--red-tint);color:var(--red)}
+
+  .unit{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+  .unit>summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+  .unit>summary::-webkit-details-marker{display:none}
+  .unit .un{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--red-tint);color:var(--red);
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:2px}
+  .unit .ut{flex:1;min-width:0}
+  .unit .ut b{display:block;font-size:15px}
+  .unit .ut span{font-size:13px;color:var(--muted)}
+  .unit .body{padding:0 14px 14px;border-top:1px solid var(--line-soft);margin-top:2px}
+  .unit[open] .body{padding-top:12px}
+  .kv{margin:10px 0 0}
+  .kv b{font-size:13px;color:var(--red);display:block;margin-bottom:3px;letter-spacing:.03em}
+  .kv ul{margin:4px 0 0;padding-left:20px}
+  .kv li{margin:2px 0}
+  .txts{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+  .txts span{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:13px}
+  .chk{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:14px;color:var(--ink-soft);
+    background:var(--jade-tint);border-radius:9px;padding:8px 11px;cursor:pointer}
+  .chk input{width:17px;height:17px;accent-color:var(--good)}
+
+  body[data-role="student"] .t-only{display:none}
+  body[data-role="teacher"] .s-only{display:none}
+
+  /* signature */
+  .sc{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden;display:flex;flex-direction:column}
+  .sc .top{padding:14px 16px;border-bottom:1px solid var(--line-soft)}
+  .sc h3{font-size:16px;margin-top:6px}
+  .sc .tl{color:var(--ink-soft);font-size:14px;margin:6px 0 0}
+  .sc .meta{font-size:12px;color:var(--muted);margin-top:8px}
+  .sc .act{padding:11px 16px;display:flex;gap:8px;margin-top:auto}
+  .btn{border:1px solid var(--red);background:var(--red);color:#fff;border-radius:9px;padding:8px 14px;
+    font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.ghost{background:transparent;color:var(--red)}
+  .btn.dark{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .btn:disabled{opacity:.45;cursor:default}
+
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{font-size:12px;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
+  td.t{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--red);font-weight:700}
+
+  dialog{border:none;border-radius:16px;padding:0;max-width:820px;width:calc(100% - 28px);
+    background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  dialog::backdrop{background:rgba(20,20,19,.55)}
+  .dlg{padding:20px 22px 24px}
+  .dlg .x{position:sticky;top:0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+    background:var(--surface);padding-bottom:8px}
+  .dlg h3{font-size:19px}
+  .xbtn{border:1px solid var(--line);background:transparent;color:var(--ink-soft);border-radius:8px;
+    width:32px;height:32px;cursor:pointer;font-size:16px;flex:0 0 auto}
+
+  /* quiz */
+  .qbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+  .opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--paper);
+    border-radius:10px;padding:10px 13px;margin-top:8px;cursor:pointer;font-size:15px;color:var(--ink);font-family:inherit}
+  .opt:hover{border-color:var(--red)}
+  .opt.ok{border-color:var(--good);background:var(--jade-tint);color:var(--good);font-weight:700}
+  .opt.no{border-color:var(--red);background:var(--red-tint);color:var(--red)}
+  .exp{margin-top:12px;padding:11px 13px;border-radius:10px;background:var(--gold-tint);color:var(--ink-soft);font-size:14px}
+  select,input[type=number]{border:1px solid var(--line);background:var(--surface);color:var(--ink);
+    border-radius:9px;padding:7px 10px;font-size:14px;font-family:inherit}
+  label.fld{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+
+  /* exam paper */
+  .paper{background:#fff;color:#111;border:1px solid var(--line);border-radius:12px;padding:26px 30px;margin-top:16px;line-height:1.9}
+  .paper h3{font-size:19px;text-align:center;color:#111}
+  .paper .ph{text-align:center;border-bottom:2px solid #111;padding-bottom:10px;margin-bottom:16px;color:#444;font-size:13px}
+  .paper ol{padding-left:22px}
+  .paper li{margin-bottom:12px}
+  .paper .os{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;font-size:14px;color:#222;margin-top:3px}
+  .paper .wl{border-bottom:1px solid #bbb;height:26px;margin:4px 0}
+  .paper .key{margin-top:22px;border-top:2px dashed #999;padding-top:14px;font-size:13px;color:#333}
+
+  @media print{
+    body{background:#fff}
+    .no-print,nav,.hero,section>h2,section>p.lead{display:none!important}
+    section{border:none;padding:0}
+    .paper{border:none;padding:0;margin:0}
+    .prt,.prt *{visibility:visible}
+    dialog{position:static;display:block;box-shadow:none;max-width:100%}
+  }
+  .foot{padding:26px 0;color:var(--muted);font-size:13px;text-align:center}
+</style>
+
+<nav class="no-print">
+  <div class="navin">
+    <span class="brand">國語文</span>
+    <a href="#map">課程地圖</a>
+    <a href="#grade">年級課程</a>
+    <a href="#sig">特色課程</a>
+    <a href="#write">寫作教室</a>
+    <a href="#ref">語文常識</a>
+    <a href="#quiz">隨堂測驗</a>
+    <a href="#exam">考卷產生器</a>
+    <a href="#backup">備份</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero no-print">
+    <span class="seal">小一 → 高三 ・ 十二年一貫</span>
+    <h1>國語文課程地圖</h1>
+    <p>12 個年級、96 個教學單元，從注音符號一路走到學測國寫。附 8 堂「四小時單堂完課」的特色課程，可獨立開課。<br>教師版看教案與提問設計，學生版看學習任務與進度。</p>
+    <div class="roles">
+      <button class="rbtn" id="rT">教師版</button>
+      <button class="rbtn on" id="rS">學生版</button>
+      <span class="rhint" id="rHint">學生版：顯示每單元的學習任務與進度勾選。</span>
+    </div>
+  </header>
+
+  <section id="map">
+    <h2><span class="no">01</span>十二年課程地圖</h2>
+    <p class="lead">四個階段，難度逐年遞進。點年級可直接跳到該年級的完整課程。</p>
+    <div id="mapBox"></div>
+  </section>
+
+  <section id="grade">
+    <h2><span class="no">02</span>年級課程</h2>
+    <p class="lead">每個年級：年度目標、核心能力、8 個教學單元、語文重點、評量方式。</p>
+    <div class="gpick" id="gPick"></div>
+    <div id="gBox"></div>
+  </section>
+
+  <section id="sig">
+    <h2><span class="no">03</span>特色課程 · 四小時單堂完課</h2>
+    <p class="lead">每堂剛好 4 小時（含休息），有完整時間流程、教材清單、學生產出與講評方式。可用於營隊、社團課、特色選修、加深加廣或補救教學。點「完整教案」可列印。</p>
+    <div class="grid g2" id="sigBox"></div>
+  </section>
+
+  <section id="write">
+    <h2><span class="no">04</span>寫作教室</h2>
+    <p class="lead">八張方法卡。作文的分數不在文筆，在方法——先看「常見死法」，再照步驟做。</p>
+    <div class="grid g2" id="writeBox"></div>
+  </section>
+
+  <section id="ref">
+    <h2><span class="no">05</span>語文常識庫</h2>
+    <p class="lead">修辭格、文言虛字、六書、標點——考試最常出、學生最常錯的四張表。</p>
+    <div id="refBox"></div>
+  </section>
+
+  <section id="quiz">
+    <h2><span class="no">06</span>隨堂測驗</h2>
+    <p class="lead">選難度與題型，每輪 10 題，答完立刻看解析。</p>
+    <div class="row no-print" style="margin-bottom:14px">
+      <label class="fld">難度<select id="qLv"></select></label>
+      <label class="fld">題型<select id="qTp"></select></label>
+      <button class="btn" id="qNew">開始新的一輪</button>
+    </div>
+    <div id="qBox" class="qbox">選好難度後按「開始新的一輪」。</div>
+  </section>
+
+  <section id="exam">
+    <h2><span class="no">07</span>考卷產生器</h2>
+    <p class="lead">依難度隨機出卷，含作文題與解答卷，可直接列印或存成 PDF。</p>
+    <div class="row no-print">
+      <label class="fld">難度<select id="eLv"></select></label>
+      <label class="fld">選擇題數<input type="number" id="eN" value="15" min="5" max="30" style="width:90px"></label>
+      <label class="fld">作文題<select id="eW"><option value="1">要</option><option value="0">不要</option></select></label>
+      <button class="btn" id="eGo">產生考卷</button>
+      <button class="btn ghost" id="ePrint" disabled>列印／存 PDF</button>
+    </div>
+    <div id="eBox"></div>
+  </section>
+
+  <section id="backup" class="no-print">
+    <h2><span class="no">08</span>進度備份</h2>
+    <p class="lead">進度存在這台裝置的瀏覽器裡。換手機或清快取前，先匯出。</p>
+    <div class="card">
+      <div class="row">
+        <button class="btn dark" id="bOut">匯出進度</button>
+        <button class="btn ghost" id="bIn">匯入進度</button>
+        <button class="btn ghost" id="bClr">清除全部進度</button>
+      </div>
+      <p class="muted" style="margin:12px 0 0" id="bMsg">已完成單元：0 / 96</p>
+      <textarea id="bTxt" style="display:none;width:100%;height:120px;margin-top:10px;border:1px solid var(--line);border-radius:9px;padding:9px;font-family:ui-monospace,monospace;font-size:12px;background:var(--paper);color:var(--ink)"></textarea>
+    </div>
+  </section>
+
+  <p class="foot">國語文課程地圖 · 小一到高三 ｜ 課程大綱依 108 課綱國語文領域精神編寫，選文為台灣課本常見篇目，實際授課請依所用版本調整。</p>
+</div>
+
+<dialog id="dlg"><div class="dlg prt" id="dlgIn"></div></dialog>
+
+<script>
+var GRADES=[{"grade":"小學一年級","stage":"國小低年級","goal":"透過注音符號奠定識字與聆聽基礎，啟發對日常閱讀與口語表達的興趣。","abilities":["熟練注音符號的拼讀、直讀與聲調辨識，並能正確進行日常口語拼音。","認讀與書寫常用漢字約300字，掌握基本筆畫、筆順並保持正確握筆姿勢。","能專注聆聽他人說話，並能簡要複述聽到的生活關鍵內容。","使用清晰的口齒與完整的句子，表達個人的感受、觀察與簡單需求。","在教師或家長引導下，嘗試朗讀圖畫書或童詩，初步體會閱讀的樂趣。"],"units":[{"title":"注音符號快樂園","focus":"熟練注音符號聲母與韻母拼讀","texts":["〈注音符號歌〉（傳統兒歌）","〈聲調魔法卡〉（創意注音詩）"],"writing":"練習注音符號的正確筆順與單音、雙音節詞彙的拼寫"},{"title":"筆畫與我的名字","focus":"掌握基本漢字筆畫與筆順規則","texts":["〈天天星期一〉（生活童謠）","〈我的名字〉（自我介紹短文）"],"writing":"書寫個人姓名與基本象形文字，要求筆畫端正且筆順正確"},{"title":"溫馨的家","focus":"學習家庭成員稱謂與基礎對話","texts":["〈小狗搖尾巴〉（兒童生活詩）","〈爸爸媽媽的手〉（溫馨敘事散文）"],"writing":"以注音符號輔助，寫出一句對家人表達感謝與愛意的話"},{"title":"大自然的心跳","focus":"觀察季節與氣候，學習形容詞","texts":["〈風姑娘吹哨子〉（大自然童詩）","〈春天的腳步〉（擬人化童詩）"],"writing":"口頭描述一種天氣，並用注音與簡單漢字寫下天氣特徵"},{"title":"神奇的動物朋友","focus":"認識動物特徵，學習常用動詞","texts":["〈小貓釣魚〉（經典寓言故事）","〈小白兔種蘿蔔〉（趣味擬人故事）"],"writing":"運用簡單字詞與注音，進行「（誰）在（做什麼）」的短句仿寫"},{"title":"生活好習慣","focus":"建立個人衛生與作息常規觀念","texts":["〈刷牙歌〉（生活保健兒歌）","〈早起小公雞〉（寓意童詩）"],"writing":"仿寫基礎句型：「我會（做什麼）」與「我也會（做什麼）」"},{"title":"故事躲在哪裡","focus":"圖畫書引導閱讀與看圖說故事","texts":["《拔蘿蔔》（經典民間故事）","《小蝌蚪找媽媽》（童話故事）"],"writing":"看圖並發揮想像，寫出兩句連貫的話來描述圖片中的事件"},{"title":"想像力飛呀飛","focus":"激發創造力，練習擬人化說法","texts":["〈月亮跟著我〉（童趣生活詩）","〈玩具們的悄悄話〉（幻想童詩）"],"writing":"對自己的玩具或文具說一句話，寫下童趣的對話句"}],"keySkills":["注音符號聲調（一聲、二聲、三聲、四聲、輕聲）的正確辨識與標記","常用基本筆畫（橫、豎、撇、捺、點、折）的名稱與書寫法","常用字形結構（上下結構、左右結構、獨體字）的空間分配","基本感官與空間詞彙（大、小、長、短、上、下、左、右）之運用","基礎直述句「（誰）＋（在什麼地方）＋（做什麼事）」的完整建構"],"assessment":["注音符號拼讀與聽寫口試，檢測學生拼音、聲調與直讀的熟練度。","漢字硬筆寫字實作評量，評估基本筆順、握筆姿勢與字體端正度。","課文朗讀與看圖說故事口頭評量，檢測發音清晰度與口語表達邏輯。"]},{"grade":"小學二年級","stage":"國小低年級","goal":"擴充識字與詞彙量，能流暢朗讀短文，並學習基礎的生活段落書寫。","abilities":["認讀常用漢字約700字，並能靈活運用常用部首與字形偏旁輔助識字。","能使用國字搭配注音符號，正確書寫短句與生活常用的簡單便條。","朗讀課文或短文時，能依據標點符號進行適當停頓，並讀出語氣起伏。","能聽懂簡單的生活提問，並給出邏輯通順、語意表達完整的回答。","喜愛閱讀課外繪本與短篇童話，並能用自己的話說出故事的主要情節。"],"units":[{"title":"有趣的文字遊戲","focus":"利用部首與偏旁規律探索漢字","texts":["〈漢字的秘密〉（字形結構童詩）","〈猜燈謎〉（民俗字謎童謠）"],"writing":"設計趣味文字卡，寫出相同部首的三個單字並組合成詞"},{"title":"我的學校生活","focus":"描述校園場景與同儕相處點滴","texts":["〈下課十分鐘〉（校園生活童詩）","〈我的新書包〉（生活記敘文）"],"writing":"寫一小段話，介紹自己在學校最喜歡的角落或最常玩的遊戲"},{"title":"四季的調色盤","focus":"運用色彩詞彙描摹四季自然景致","texts":["〈夏天的風〉（自然景物詩）","〈落葉的旅行〉（擬人化記敘散文）"],"writing":"練習並仿寫句型：「（什麼時間），（哪裡）有（什麼風景）」"},{"title":"生活中的符號幫手","focus":"認識常見標點符號與其語氣功能","texts":["〈標點符號爭功勞〉（趣味語文詩）","〈郵差叔叔送包裹〉（生活記敘文）"],"writing":"在段落中正確填入逗號、句號、問號與驚嘆號，並調整語氣"},{"title":"溫馨的便條與卡片","focus":"學習便條與卡片的格式與對象語氣","texts":["〈給外婆的一封信〉（實用書信範例）","〈小熊留給小兔的便條〉（故事體便條）"],"writing":"親手書寫一張感謝卡片給父母或老師，注意問候語與署名格式"},{"title":"大自然的啟示","focus":"透過經典寓言領會生活道理","texts":["〈龜兔賽跑〉（伊索寓言故事改寫）","〈北風與太陽〉（經典寓言故事）"],"writing":"用兩到三句話，寫下閱讀完該寓言故事後得到的想法或啟示"},{"title":"我的休閒時光","focus":"記敘個人興趣、運動或家庭旅遊","texts":["〈公園野餐記〉（家庭生活散文）","〈騎腳踏車真好玩〉（個人經驗記敘）"],"writing":"以「我最喜歡的休閒活動」為題，寫下包含原因的三句連貫短文"},{"title":"奇妙的發明與想像","focus":"引導科學好奇心與日常生活聯想","texts":["〈雨傘像一朵花〉（比喻法童詩）","〈小發明家的大夢想〉（故事散文）"],"writing":"發揮想像力，設計一個未來發明，寫下它的名稱與特別功用"}],"keySkills":["形近字（如：己/已/巳、未/末、人/入）的精確辨析與認讀","常用部首（如：水/氵、木、手/扌、心/忄）字義歸類與衍生詞","基礎標點符號（逗號、句號、問號、驚嘆號）在寫作中的正確擺放","量詞（如：一隻、一條、一朵、一陣、一片）的精確語境搭配","基礎因果複句「因為……所以……」的口語表達與短句仿寫"],"assessment":["生字與常用詞彙聽寫測試，檢驗低年級形近字與部首字音義掌握。","短文朗讀流暢度評量，評估標點符號停頓、聲音抑揚頓挫與自信心。","生活實用寫作實作（便條/感謝卡），檢查書寫格式與文意流暢度。"]},{"grade":"小學三年級","stage":"國小中年級","goal":"轉入以純國字為主的學習，發展基礎段落寫作與多元閱讀擷取策略。","abilities":["主動認讀與書寫常用漢字約1100字，理解並掌握形聲字的結構規律。","熟練學會使用部首及音序查字法查閱字典，具備自主識字的習慣與能力。","能閱讀400至600字的短篇故事，並能運用關鍵字摘要出段落大意。","在口語與書寫中，能有條理地描述一件事情的起因、經過與結果。","學會使用多樣化的標點符號，並在寫作中建立清晰的段落區隔觀念。"],"units":[{"title":"字典是我的好朋友","focus":"掌握部首與音序，提升識字量","texts":["〈神奇的文字百寶箱〉（工具書導讀）","〈字寶寶找家〉（漢字偏旁結構散文）"],"writing":"記錄一次查字典的過程，寫出新學單字的拼音、字義並造句"},{"title":"大自然的觀察家","focus":"細緻觀察身邊植物，運用五感描寫","texts":["〈觀察一朵花〉（科普記敘短文）","〈神木的秘密〉（台灣森林自然散文）"],"writing":"選擇校園中的一種植物，寫下約80字包含視覺與觸覺的觀察段落"},{"title":"地方采風與古蹟","focus":"介紹台灣鄉土特色，描述地景建物","texts":["〈九份老街漫步〉（台灣鄉土散文）","〈紅毛城的故事〉（歷史古蹟導覽）"],"writing":"仿照課文，寫一個完整段落介紹自己家鄉最具特色的一個景點"},{"title":"童話與想像世界","focus":"閱讀現代童話，體會故事起承轉合","texts":["〈影子去哪裡了〉（現代幻想童話）","〈會唱歌的森林〉（經典童話改寫）"],"writing":"編寫一個簡短童話，字數約150字，須包含明確的角色與結局"},{"title":"分享與互助","focus":"體會人際關懷，學習感恩與合作精神","texts":["〈一碗熱湯的溫暖〉（生活敘事散文）","〈牆角的小蒲公英〉（寓意文學）"],"writing":"以「一次難忘的合作經驗」為題，寫作一個包含細節的120字段落"},{"title":"傳統民俗與節慶","focus":"探討傳統節日的起源與文化內涵","texts":["〈端午包粽與賽龍舟〉（節慶散文）","〈中秋賞月與傳說〉（文化故事）"],"writing":"描寫家裡過某個傳統節日的情景，重點放在現場熱鬧氣氛的渲染"},{"title":"做時間的主人","focus":"反思生活作息，學習簡單事理闡述","texts":["〈我的時間規劃表〉（說明性散文）","〈今日事今日畢〉（勵志故事小品）"],"writing":"寫一篇生活日記，反思自己一整天的時間管理並提出改進方法"},{"title":"人物的臉譜","focus":"學習人物外貌與表情特徵基礎描寫","texts":["〈我的超人媽媽〉（人物特寫散文）","〈隔壁的老園丁〉（生活記敘文）"],"writing":"寫一段文字，詳細描寫一位身邊人物的外貌、穿著與特有的表情"}],"keySkills":["形聲字之聲符（表音）與意符（表意）的原理與識記","字典查閱雙軌技巧（音序查字法與部首查字法）","標點符號的擴充：頓號、冒號、引號的正確配對與書寫格式","修辭格初步認識：明喻（使用「像、如」）、擬人、排比的仿寫","段落寫作的「總起句」與「總結句」作用與架構練習"],"assessment":["查字典限時實作評量，檢測學生音序與部首檢索的實際操作速度。","閱讀理解紙筆測驗，給定一篇未讀過的短文，要求圈出段落關鍵字並寫出段意。","引導式寫作評量，要求學生書寫一個包含起承轉合結構的150字完整段落。"]},{"grade":"小學四年級","stage":"國小中年級","goal":"精進段落銜接與文章整體架構，提升說明性與記敘性文本的深層理解與輸出。","abilities":["辨識與書寫常用漢字約1500字，能正確分辨多音字與異體字的音義。","理解自然段與意義段的差別，能摘要文章大意並繪製基礎結構心智圖。","能口述個人見聞或新聞，並針對同儕的發言提出具體的疑問與補充。","熟練並列、因果、轉折、遞進等常用複句，並靈活運用於段落銜接。","能獨立寫出結構完整、段落分明、字數300字以上的各類記敘文。"],"units":[{"title":"神奇的自然現象","focus":"閱讀科普說明文，學習擷取因果關係","texts":["〈水的三態魔法〉（科普說明文）","〈彩虹的祕密〉（自然科學小品）"],"writing":"以「（某種自然現象）是怎麼產生的」為題，寫作一段科普說明文"},{"title":"動物的生存智慧","focus":"觀察動植物行為，體會生命多樣性","texts":["〈小燕子築巢記〉（自然寫實散文）","〈螞蟻的地下帝國〉（昆蟲觀察記選段）"],"writing":"仿照觀察文，寫一篇200字的「校園昆蟲/小動物觀察記」"},{"title":"台灣的山海傳奇","focus":"認識台灣地理景觀，學習空間順序記敘","texts":["〈探訪阿里山雲海〉（地景遊記）","〈太魯閣峽谷驚嘆〉（山水抒情散文）"],"writing":"運用空間轉移（移步換景法），寫作一篇300字景物遊記短文"},{"title":"歷史與神話人物","focus":"分析神話人物性格，學習多角度描寫","texts":["〈愚公移山〉（古典列子寓言譯寫）","〈精衛填海〉（山海經故事改寫）"],"writing":"寫作短文：「如果我是（某神話人物），我會如何解決這個難題」"},{"title":"生活的智慧王","focus":"引導解決生活問題，說明具體步驟","texts":["〈垃圾變黃金〉（環保生活散文）","〈祖母的醃漬罐〉（智慧生活敘事）"],"writing":"說明文寫作：介紹一個生活小妙招，並使用連接詞列點說明步驟"},{"title":"讀書的樂趣","focus":"學習製作讀書筆記，撰寫簡單讀後感","texts":["〈我與圖書館的約會〉（個人經驗分享）","〈閱讀，打開世界的窗〉（論說散文）"],"writing":"撰寫一篇300字短篇讀書心得，必須包含大意、最喜歡的部分與反思"},{"title":"我的超級好朋友","focus":"刻劃人物細節特寫，加入對話與事件","texts":["〈我們這一家〉（溫馨幽默散文）","〈最好的對手〉（校園生活敘事）"],"writing":"以「我的好夥伴」為題，寫一篇300字以上、包含對話的人物記敘文"},{"title":"感恩的季節","focus":"學習真摯情感表達，注重情意描寫","texts":["〈一封遲來的感謝信〉（抒情書信）","〈默默耕耘的清道夫〉（感人敘事散文）"],"writing":"書寫一封給生活身邊助人者的信，結合具體感人事件與內心謝意"}],"keySkills":["一字多音（多音字）在不同詞境下的正確音義辨析","常用複句連接詞（雖然……但是……、不僅……而且……、如果……就……）","修辭格深化：暗喻（使用「是、成為」）、擬物、誇張的運用與判別","文章谋篇佈局：時間順序、空間順序在記敘文中的交替使用","常用成語分類學習（如描寫自然景色、人物動作、優秀品格）"],"assessment":["字音字形與常用成語段落填空紙筆測驗，評估語彙積累與辨析能力。","文章大意摘要與心智圖繪製實作，針對指定說明文，畫出文章架構圖。","命題作文評量，在40分鐘內寫作一篇300字以上、結構完整的記敘文。"]},{"grade":"小學五年級","stage":"國小高年級","goal":"探討多元文化與議題文本，強化邏輯思辨力，能書寫條理分明的敘事與說明文。","abilities":["認讀與書寫常用漢字約2000字，能靈活運用部首與偏旁歸類形近字與同音字。","能利用上下文明確推論生詞含意，主動掌握長篇科普或文學文章之關鍵訊息。","能運用「預測」、「澄清」與「提問」等閱讀理解策略進行小組自主學習。","在小組討論中能尊重多元意見，並能用事實論據與具體實例支持自己的觀點。","能獨立寫出切合主題、段落分明、字數450字以上的各類記敘與說明文本。"],"units":[{"title":"走入台灣的老故事","focus":"閱讀台灣文史故事，學習倒敘與插敘法","texts":["〈淡水紅毛城的落日〉（歷史抒情散文）","〈尋訪老街的木雕師傅〉（人物文化散文）"],"writing":"以「回憶那一幕」為題，運用倒敘法寫一篇敘事結構深刻的記敘文"},{"title":"浩瀚的大自然與環境","focus":"探討生態保育，寫作結構化說理散文","texts":["〈黑潮上的飛魚〉（廖鴻基海洋散文選）","〈北極熊的哀歌〉（環境議題散文）"],"writing":"寫一篇關心環境保護的文章，清楚提出三項解決環境問題的具體建議"},{"title":"走訪世界名勝","focus":"閱讀世界人文遊記，學習動靜結合寫法","texts":["〈威尼斯的水上華爾滋〉（異國地景散文）","〈金字塔下的沉思〉（人文古蹟思考遊記）"],"writing":"以「一次美麗的旅行」為題，動靜結合描寫風景並抒發內心深刻感想"},{"title":"科學巨人的肩膀","focus":"閱讀傳記，擷取人物生命的關鍵抉擇點","texts":["〈愛迪生的光明之路〉（科學家傳記）","〈居禮夫人的美麗射線〉（科學家軼事散文）"],"writing":"寫作讀後感：「我從（某位科學家/歷史人物）身上學到的生命態度」"},{"title":"傳統藝術的魅力","focus":"認識傳統戲劇美學與非物質文化傳承","texts":["〈掌中風雲：布袋戲的傳承〉（文藝說明文）","〈廟埕前的歌仔戲記憶〉（抒情生活文）"],"writing":"撰寫一篇350字的說明文，向外國友人有條理地介紹台灣的一項傳統藝術"},{"title":"人際關係的安全網","focus":"學習同理心，處理校園衝突與溝通技巧","texts":["〈當憤怒來敲門〉（心理情緒散文）","〈聽，樹葉在說悄悄話〉（校園生活故事）"],"writing":"以「一場難忘的誤會」為題，記敘衝突過程並深入分析事後的情感轉化"},{"title":"詩歌與生活的韻律","focus":"賞析現代新詩，探討意象與分行美感","texts":["〈紙船印象〉（洪醒夫經典散文新詩化）","〈樹的願望〉（現代意象新詩）"],"writing":"嘗試創作一首12行以上的現代詩，必須運用比喻、擬人與排比修辭"},{"title":"生活的智慧哲理","focus":"從日常事物中領悟並闡述生命哲理","texts":["〈路邊的一顆鵝卵石〉（哲理散文）","〈一粒麥子的力量〉（生命教育故事）"],"writing":"以「（某件小物件）帶給我的啟示」為題，寫一篇說理與抒情並重的散文"}],"keySkills":["漢字構字基本原理初步認識（六書中的象形、指事、會意、形聲）","常用成語典故來源探究（如寓言、歷史典故，能說出背後故事）","高階修辭格學習：借代、設問（提問/激問/懸問的分辨）、對偶","說明文常見結構模式：總分總、列舉法、比較法、定義法的解析","多重複句（如：「雖然……但為了……所以……」）的句型建構與仿寫"],"assessment":["口頭發表與聽力評量：針對指定世界人文地景，小組合作簡報並現場答詢。","閱讀素養理解紙筆測驗，重點評估生詞推論與跨段落主旨擷取能力。","長篇命題作文寫作（450字以上），評估段落銜接、修辭運用與倒敘法流暢度。"]},{"grade":"小學六年級","stage":"國小高年級","goal":"融會貫通國小聽說讀寫，能獨立寫作結構嚴謹、情感細緻的記敘文與議論文。","abilities":["主動於課外閱讀中運用語文工具排除生字障礙，閱讀識字量累計達2500字。","能分析不同文本的寫作立場與潛在觀點，精確辨析「事實」與「意見」之差異。","能就社會公共議題進行條理分明的口頭申述，並能與他人進行理性辯論。","熟練掌握多樣的修辭技巧與篇章布局結構，提升寫作的情意感染力。","能於50分鐘之內，寫出結構嚴謹、修辭豐富、字數500至600字以上的完整文章。"],"units":[{"title":"我的成長里程碑","focus":"回顧六年小學時光，抒發真摯情感","texts":["〈風中的銀杏樹〉（畢業抒情散文）","〈那一年，我們一起吹口琴〉（校園憶往散文）"],"writing":"以「給六年後的自己」或「畢業前夕的真心話」為題，書寫一封深情信件"},{"title":"人與土地的對話","focus":"關懷台灣本土文化，理解土地共生價值","texts":["〈大甲媽祖遶境隨筆〉（台灣民俗紀實散文）","〈梯田上的黃金稻穗〉（農村地景散文）"],"writing":"以「我眼中的台灣角落」為題，撰寫一篇結合文化特色與環境風景的散文"},{"title":"經典散文賞析","focus":"欣賞大師名作，學習其遣詞用字與結構","texts":["〈背影〉（朱自清經典名作）","〈雅量〉（宋晶宜經典人生散文）"],"writing":"模仿經典作家的「物件寄情法」，以一件隨身生活物件為題寫作抒情文"},{"title":"辯論與獨立思考","focus":"分辨事實與觀點，學習論證與反駁技巧","texts":["〈網路交友的利與弊〉（社會公共議題說明）","〈小學生應否攜帶手機上學〉（辯論議題探討）"],"writing":"撰寫一篇結構完整的論說文，明確支持一項觀點並能寫出合理駁論"},{"title":"科學、歷史與哲學","focus":"跨學科領域閱讀，探究發現背後的思考","texts":["〈當哥白尼轉動地球〉（科學思想史散文）","〈莊子說故事：莊周夢蝶〉（古典哲學白話改寫）"],"writing":"以「假如時光能倒流」為題，撰寫一篇科學幻想或歷史場景改寫短文"},{"title":"世界文學之窗","focus":"賞析外國經典文學，探究人性光輝","texts":["〈最後的一片葉子〉（歐亨利經典短篇改寫）","〈老人與海的奮鬥〉（海明威小說節選與導讀）"],"writing":"撰寫一段200字的人物內心世界獨白，生動刻劃主角面對挫折的掙扎"},{"title":"藝術與生活的共鳴","focus":"藉由多元藝術媒介，引導美感文字轉譯","texts":["〈莫內花園的睡蓮〉（藝術鑑賞散文）","〈命運交響曲的震撼〉（音樂聆聽感受抒情）"],"writing":"聆聽一首古典音樂或欣賞一幅畫，將其聽/視覺感受轉化為300字意境描寫"},{"title":"迎向未來的挑戰","focus":"探索個人特質與抱負，建立正向價值觀","texts":["〈路，是人走出來的〉（勵志說理散文）","〈當風揚起時〉（青年生涯探索散文）"],"writing":"以「我對國中生活的期待與規劃」為題，撰寫500字以上結構完整的散文"}],"keySkills":["六書造字法則完整體系（象形、指事、會意、形聲）的辨識與實例整理","常用成語在轉折、遞進等複雜句型中的精確搭配與修辭轉化","進階修辭格：層遞、映襯（反襯與對襯）、雙關（諧音與語意）的靈活運用","文章整體章法設計：首尾呼應法、插敘法、夾敘夾議、轉折過渡段的安排","論說文基本三要素（論點、論據、論證）的觀念建立與事實/觀點辨析"],"assessment":["課堂辯論會實作評量，針對公共議題分組進行現場口頭辯駁，評估邏輯與表達。","閱讀素養整合評量，提供跨文本主題閱讀材料，完成深層分析與批判問答題。","小學畢業專題寫作評量，限時50分鐘撰寫一篇600字以上、切合主題的命題作文。"]},{"grade":"國中一年級","stage":"國中","goal":"銜接國中文言與白話文本，建立文言文基礎語感，並熟習多元記敘與基礎議論文。","abilities":["熟習基本文言字詞與常用句型，能正確進行斷句、朗讀並口譯簡易文言短文。","能精確辨析文章意旨，運用摘錄要點、重組層次等方法繪製文章結構圖。","能靈活運用常用修辭與多元摹寫手法，進行生動、寫實的寫景與敘事寫作。","掌握說明文與基礎論說文之結構特徵，寫出條理清晰、論理明確的短文。","每學期能自主閱讀至少3本長篇著作，並完成多元化形式的讀書報告。"],"units":[{"title":"從白話到文言的橋樑","focus":"建立文言單音詞與今昔異義語感","texts":["〈記承天寺夜遊〉（蘇軾）","〈兒時記趣〉（沈復）"],"writing":"文言改寫白話：將〈兒時記趣〉之童趣段落改寫為現代生動活潑之白話散文"},{"title":"人性的溫暖與關懷","focus":"分析敘事散文人物動作與情感刻畫","texts":["〈背影〉（朱自清）","〈謝天〉（陳之藩）"],"writing":"以「那雙溫暖的手」為題，書寫一篇500字以上、細節描摹生動的人物記敘文"},{"title":"大自然的四季樂章","focus":"學習移步換景與多重感官摹寫","texts":["〈聲音鐘〉（簡媜）","〈夏夜〉（楊喚）"],"writing":"以「清晨的市場」或「深夜的校園」為題，運用多重感官摹寫進行寫景練習"},{"title":"生命的智慧與省思","focus":"閱讀寓言與小品，體會其中哲理","texts":["〈揠苗助長〉（《孟子》）","〈酸橘子〉（琦君）"],"writing":"寫作：針對一次個人生活挫折，寫下它帶給你的生命正面智慧（400字）"},{"title":"工具書與傳記筆法","focus":"認識文言虛字與辭典使用技巧","texts":["〈工具書的使用〉（語文常識）","〈五柳先生傳〉（陶淵明）"],"writing":"以「我的自傳」為題，模仿五柳先生傳的幽默體例撰寫一篇白話趣味自傳"},{"title":"台灣本土風情與鄉土情懷","focus":"深入閱讀鄉土文學，理解在地情感","texts":["〈負荷〉（吳晟）","〈魚〉（黃春明）"],"writing":"寫作短文：「我與家鄉的某個老店面」，重點刻劃人情味與本土記憶"},{"title":"論說文的起步：立論與例證","focus":"學習如何明確表達觀點並提供合適例證","texts":["〈雅量〉（宋晶宜）","〈習慣說〉（劉蓉）"],"writing":"以「論誠實」為題，寫作一篇包含核心論點與兩個具體生活例證的論說文"},{"title":"古典詩歌的初探：唐詩格律","focus":"認識近體詩之平仄、押韻與對仗格律","texts":["〈過故人莊〉（孟浩然）","〈黃鶴樓送孟浩然之廣陵〉（李白）","〈登鸛雀樓〉（王之渙）"],"writing":"詩境意譯與擴寫：將指定唐詩的意境，擴寫為300字極具畫面感的抒情散文"}],"keySkills":["文言基本核心虛字：「之、乎、者、也、矣、焉、而」的義辨與常用例","唐代近體詩基本格律：絕句與律詩的字數、句數、平仄、押韻與對仗要求","漢字偏旁部首與字義的延伸關聯（如言部字、手部字代表的行為屬性）","四大摹寫（視覺、聽覺、嗅覺、觸覺）、排比、設問與誇張修辭的深化","文章段落結構佈局：首尾呼應、起承轉合的完整設計與過渡詞彙使用"],"assessment":["國中近體詩格律與文言基礎虛字紙筆測驗，檢核國學常識與文言語感基礎。","文言短篇閱讀測驗，要求現場進行句讀（斷句）、關鍵字義解釋與白話口譯。","定期寫作評量，限時在45分鐘內寫作一篇500-600字的完整記敘文（如「那雙溫暖的手」）。"]},{"grade":"國中二年級","stage":"國中","goal":"深化古典文藝與現代散文鑑賞，掌握多樣化修辭，並熟練論說文之多元論證方法。","abilities":["能流暢閱讀中等難度的文言散文，精確掌握文言實字一詞多義與動詞活用。","能精確歸納文本核心主旨，並針對作者所用的論證法與論據進行批判性分析。","能靈活運用映襯、雙關、借代、引用等修辭格，使文章句式豐富多變且優美。","能撰寫論據充分、論證嚴密的論說文，展現深刻的邏輯思辨與表達力。","在課堂討論中，能主動針對同儕的發表內容，進行有重點、具建設性的講評。"],"units":[{"title":"古典山水之美","focus":"學習文言寫景文，掌握借景抒情手法","texts":["〈記承天寺夜遊〉（蘇軾）","〈與元微之書〉（白居易選段）"],"writing":"以「月夜漫步」為題，融合古典筆法與白話，書寫500字以上的夜景寫景文"},{"title":"人性的幽暗與光明","focus":"閱讀中外寫實文學，探討道德與尊嚴","texts":["〈空城計〉（羅貫中《三國演義》）","〈麥帥為子祈禱文〉（麥克阿瑟）"],"writing":"寫作：「一場心靈的拔河」，細緻描寫面對利益與誠實抉擇時的心理掙扎"},{"title":"詠物寄情的藝術","focus":"學習託物言志象徵手法，抽象道理實體化","texts":["〈愛蓮說〉（周敦頤）","〈鳥〉（梁實秋）"],"writing":"自選一種植物或動物作為個人精神象徵，寫一篇600字託物言志抒情文"},{"title":"生活中的幽默與自嘲","focus":"賞析文學中的諷刺、幽默與豁達智慧","texts":["〈吃冰的滋味〉（古蒙仁）","〈差不多先生傳〉（胡適）"],"writing":"以「我出糗的那一次」為題，運用幽默、寫實且帶有自嘲的筆調寫作散文"},{"title":"論說文的進階：論證法","focus":"學習歸納法、演繹法與對比論證","texts":["〈為學一首示子姪〉（彭端淑）","〈勤訓〉（李文炤）"],"writing":"以「恆心與成功」為題，靈活運用正反對比論證法寫一篇完整的論說文"},{"title":"古典韻文的殿堂：詞","focus":"理解詞牌與格律，賞析豪放與婉約宋詞","texts":["〈水調歌頭·明月幾時有〉（蘇軾）","〈如夢令·昨夜雨疏風驟〉（李清照）"],"writing":"詞境改寫：將李清照〈如夢令〉的意境，擴寫成一篇精緻優雅的古典散文"},{"title":"台灣自然生態寫作","focus":"閱讀當代海洋與山林文學，深植本土情意","texts":["〈討海人〉（廖鴻基節選）","〈大樹之歌〉（劉克襄）"],"writing":"以「我與自然的悄悄話」為題，寫一篇反映人類與大自然關係的抒情散文"},{"title":"社會觀察與諷刺文學","focus":"認識寫實諷刺手法，學習委婉表達批判","texts":["〈孔乙己〉（魯迅）","〈王冕的少年時代〉（吳敬梓《儒林外史》）"],"writing":"以「公車/捷運上的奇特觀察」為題，寫作一篇帶有微諷刺與深層反思的記敘文"}],"keySkills":["常用文言實字一詞多義（如：之、行、去、適、見、顧）在不同語境的義辨","修辭格深化：對偶、映襯（反襯與對襯辨析）、借代與雙關（諧音與語意）之應用","宋詞文體常識：詞牌、詞調、詞集與豪放/婉約兩大流派特徵","論說文佈局：正反對照結構、起承轉合在議論文中的段落安排","古典文言語序調整（如賓語前置等倒裝句式：「何陋之有」、「唯你是問」）之辨識"],"assessment":["一詞多義、詞格規律與古代文化常識紙筆測驗，檢核國語文基礎素養。","論說文邏輯寫作實作：給定爭議性議題，要求限時完成運用對比論證之議論文。","口頭發表評量：舉辦「我最推薦的一首宋詞」發表，限時3分鐘，評分其口語美感與闡述深度。"]},{"grade":"國中三年級","stage":"國中","goal":"整合國中語文能力，靈活應對會考題型，具備高度思辨力與完整且流暢的寫作輸出。","abilities":["能熟練閱讀並準確理解會考難度之白話與文言文本，具備卓越的文本擷取與分析力。","能敏銳察覺文章中的弦外之音、寫作意圖與潜在偏見，進行具批判性的思考評判。","能就社會多元議題發表邏輯嚴密的論說，立論明確、論據真實且論證合理。","熟練掌握國中常用國學常識，包括史書分類、諸子學說、書法藝術與應用文書信。","能於50分鐘大考時間內，寫出一篇結構完備、素材新穎、切中核心的主題長文。"],"units":[{"title":"古典散文的巔峰","focus":"賞析駢散結合與寄託情懷之文言名作","texts":["〈陋室銘〉（劉禹錫）","〈愛蓮說〉（重溫、比較與思辨）"],"writing":"以「我的陋室生活哲學」為題，寫作駢散相間的300字現代生活抒情文"},{"title":"文言小說與奇幻敘事","focus":"探討古典文言短篇小說的敘事美學","texts":["〈世說新語〉選（劉義慶）","〈聊齋誌異〉選（蒲松齡）"],"writing":"自選《世說新語》或《聊齋》之一則故事，改寫為情節緊湊之現代極短篇小說"},{"title":"當代議題與媒體識讀","focus":"閱讀社論與多元報導，學習獨立思考","texts":["〈當期報紙社論選讀〉（教師自選時事文本）","〈媒體識讀與假訊息辨識〉（資訊素養文本）"],"writing":"針對「應否限制青少年每日使用社群軟體時間」撰寫600字結構完整之議論文"},{"title":"古典詩歌的演變：元曲","focus":"理解曲的特質與襯字，賞析元曲通俗之美","texts":["〈天淨沙·秋思〉（馬致遠）","〈山坡羊·潼關懷古〉（張養浩）"],"writing":"詩境再造：將〈天淨沙·秋思〉之秋意，擴寫為一首極具荒涼畫面感的現代新詩"},{"title":"實用應用文：柬帖與書信","focus":"精通書信、柬帖與對聯的格式與禁忌","texts":["〈傳統與現代柬帖範例〉（應用文手冊）","〈生活對聯與行業關聯〉（文化專欄）"],"writing":"實作演練：為自己即將到來的成人禮或聚會，撰寫一封格式正確、用詞文雅的柬帖"},{"title":"史傳文學與人物風骨","focus":"閱讀古典史書選段，賞析人物謀略與風骨","texts":["〈曹劌論戰〉（《左傳》）","〈史記·留侯世家〉節選（司馬遷）"],"writing":"以「一次艱難的決策」為題，詳細記述自己做關鍵決定時的內心權衡與過程"},{"title":"會考寫作專題：多元命題拆解","focus":"熟練近年會考寫作測驗圖表與引導題型","texts":["〈我想開設這樣的一家店〉（會考引導寫作）","〈我們這個世代〉（會考滿級分樣卷分析）"],"writing":"實戰演練：在50分鐘內，現場限時書寫一篇600字會考模擬寫作試題"},{"title":"語文知識大總整","focus":"全面整理四庫、六書、書法與代稱常識","texts":["〈六書與漢字結構〉（語文常識）","〈書法字體的演變〉（語文常識）"],"writing":"撰寫一篇國中三年的「語文學習歷程回顧與未來展望（高中期待）」（500字）"}],"keySkills":["應用文規範：書信（格式、啟事、祝頌、稱謂語）、柬帖、對聯（上下聯平仄與對仗）","國學基本常識總整理：經史子集四部分類、代表著作與價值","書法字體辨識：篆、隸、草、行、楷五大字體的形體特徵與歷史演變順序","常見文化代稱：時間、季節（如：三春、金秋）、年齡（如：弱冠、不惑、耳順、花甲）","特殊文言語法：被動句、判斷句、倒裝句（如：「唯才是舉」、「微斯人，吾誰與歸」）的拆解"],"assessment":["國中會考模擬試卷（包含閱讀理解、語文與國學常識）高強度實戰紙筆測驗。","應用文實務考核：給予具體人際情境，限時書寫出格式正確、措辭得體之婚柬或書信。","寫作測驗：比照會考級分標準，限時50分鐘完成600字命題作文並予以詳細講評。"]},{"grade":"高中一年級","stage":"高中","goal":"引導高中文學與學術閱讀，銜接高中文言選篇，奠定學測知性與情意寫作之基礎。","abilities":["能流暢詮釋古典文言名篇的詞彙、句法與章法，掌握其深層文化精神。","能精確閱讀社科、自然等跨領域知性文本，敏捷地擷取主旨、條理陳述。","能比較分析不同立場之文本，判別其立論核心、前提假定與潛在邏輯漏洞。","掌握學測國寫「知性題」之審題架構，能清晰、理性、有深度地進行論述。","熟練古文之駢散結合、敘事與議論交織手法，並能將其章法轉化於日常寫作中。"],"units":[{"title":"先秦諸子的思想火花","focus":"探討儒道核心思想，引導人生智慧省思","texts":["〈論語選〉（孔子弟子）","〈大同與小康〉（《禮記》）"],"writing":"知性寫作：針對「大同理想在當代社會的實踐可能」寫一篇400字之邏輯論說文"},{"title":"古代敘事文學與溝通謀略","focus":"剖析古文外交辭令、政治謀略與因果","texts":["〈燭之武退秦師〉（左丘明）","〈師說〉（韓愈）"],"writing":"知性寫作：分析燭之武成功說退秦軍的「溝通說服策略」，條列並深入說明"},{"title":"山水地景與生命安頓","focus":"賞析文言貶謫文學，體會逆境中自我安頓","texts":["〈始得西山宴遊記〉（柳宗元）","〈醉翁亭記〉（歐陽脩）"],"writing":"情意寫作：以「在自然中與自己相遇」為題，書寫一篇600字、層次井然的情感散文"},{"title":"現代詩的意象美學","focus":"賞析新詩的意象經營、音樂性與主題探索","texts":["〈錯誤〉（鄭愁予）","〈再別康橋〉（徐志摩）"],"writing":"情意寫作：運用一個具體的「生活物件」為核心意象，創作一首15行之現代抒情詩"},{"title":"古代小說之虛與實","focus":"解讀古典小說人物刻畫與社會批判性","texts":["〈虬髯客傳〉（杜光庭）","〈劉姥姥進大觀園〉（曹雪芹《紅樓夢》）"],"writing":"情意寫作：經典視角改寫，以紅拂女的視角重新書寫太原相遇之精彩情節"},{"title":"學測國寫知性專題：圖表判讀","focus":"訓練圖表解析、數據摘要與觀點表達","texts":["〈學測知性題滿分樣卷與評分標準〉（大考中心）","〈當代科技與倫理爭議多元文本〉（學術講義）"],"writing":"知性寫作：限時完成一篇「分析圖表數據並闡述個人立場」的學測標準知性短文"},{"title":"台灣當代散文的多維面向","focus":"賞析當代作家之家族記憶與飲食文化書寫","texts":["〈髻〉（琦君）","〈夏之絕句〉（簡媜）"],"writing":"情意寫作：以「家族的特殊氣味」或「一道記憶中的菜餚」為題，書寫深情散文"},{"title":"原住民文學與多元族群視野","focus":"反思族群歷史、人與大自然生態的關係","texts":["〈最後的獵人〉（拓拔斯·塔瑪匹瑪）","〈美麗的稻穗〉（莫那能）"],"writing":"知性寫作：針對「原住民族傳統領域保育與地方環境開發之平衡點」撰寫評論"}],"keySkills":["高中文言核心虛詞（其、之、而、以、於、與、則）在十五篇古文中的多義深化","先秦兩漢學術思想史梗概（儒、道、法、墨四家核心思想體系與主要代表人物辨析）","駢文與古文（散文）之文體辨析，熟習句式平仄與駢散結合的審美特徵","學測國寫知性題兩大核心：圖表資訊判讀摘要能力、清晰論點與合乎邏輯推論之表達","高階修辭格解析：錯綜（抽換詞面/交錯語次/伸縮文句）、互文、借代在古文中的辨識"],"assessment":["高中文言古文選篇字音字形、字義文法與國學常識之階段性紙筆測驗。","知性寫作實作評量：給予一組社會調查數據，限時40分鐘完成400字之立場分析論述。","情意寫作教師評級評量：撰寫600字抒情文，由教師依學測大考雙重評分規準給予級分。"]},{"grade":"高中二年級","stage":"高中","goal":"深化古代與當代文學史思潮研究，探討文藝流派，熟練大考情意與知性雙重寫作模式。","abilities":["能深度評析古典詩歌、散文與當代文學的藝術意象、風格、章法與美學價值。","能敏捷閱讀具備學術深度的思辨性與學術文本，並針對爭議焦點進行結構化論證。","能將文學史演變、作家的生命歷程融入文本閱讀中，進行跨時空的批判性對話。","掌握學測國寫「情意題」之感悟、想像與審美書寫，文章情感真摯且思想深刻。","熟練掌握各種議論、說明、抒情與敘事手法，獨立完成結構嚴密、文采斐然之長文。"],"units":[{"title":"魏晉風度與生命覺醒","focus":"探討文人生死省思、隱逸與生命主體性","texts":["〈桃花源記〉（陶淵明）","〈蘭亭集序〉（王羲之）"],"writing":"情意寫作：以「我心中的世外桃源」為題，寫作一篇寄託個人精神理想之抒情文"},{"title":"中唐文藝復興與社會關懷","focus":"剖析古文運動與新樂府，探討文學社會責任","texts":["〈琵琶行並序〉（白居易）","〈柳子厚墓誌銘〉（韓愈）"],"writing":"情意寫作：以「聲音的感官旅程」為題，仿照〈琵琶行〉將聽覺轉化為驚豔視覺描寫"},{"title":"宋代貶謫文學的超曠之美","focus":"探討北宋儒釋道融合心境與哲學情懷","texts":["〈赤壁賦〉（蘇軾）","〈岳陽樓記〉（范仲淹）"],"writing":"知性與情意交織：以「面對人生低谷的姿態」為題，撰寫一篇600字說理抒情文"},{"title":"明清散文的真率與幽微情感","focus":"賞析性靈說與歸有光細膩瑣事寄情之美","texts":["〈項脊軒志〉（歸有光）","〈晚遊六橋待月記〉（袁宏道）"],"writing":"情意寫作：以「老房子的記憶與光影」為題，運用細節描摹與物人寄情法寫作長文"},{"title":"台灣當代小說與社會寫實","focus":"探討鄉土小說之環境變遷與社會階級問題","texts":["〈嫁妝一牛車〉（王禎和）","〈金大班的最後一夜〉（白先勇選段）"],"writing":"情意寫作：嘗試撰寫一則800字之社會寫實小說片段，刻畫一位底層小人物的宿命"},{"title":"學測國寫情意專題：感官與昇華","focus":"精進情意題細節描寫、借景抒情與生命哲理","texts":["〈大考情意題滿分樣卷與評分指標〉（大考中心）","〈當代情感抒寫美學與生命轉化〉（寫作講義）"],"writing":"情意寫作：以「溫暖的心靈印記」為題，限時50分鐘完成一篇600字以上的高考模擬作文"},{"title":"古代與當代女性發聲","focus":"探討文學作品中的性別困境與主體意識","texts":["〈聊齋誌異·嬰寧〉（蒲松齡）","〈紅玫瑰與白玫瑰〉（張愛玲，選段）"],"writing":"知性寫作：分析〈嬰寧〉中女性形象與傳統禮教的衝突與妥協，寫成400字評論"},{"title":"台灣古典文學與歷史記憶","focus":"閱讀古典詩歌中台灣歷史與族群相遇之敘述","texts":["〈鹿港乘桴記〉（洪繻）","〈台灣通史序〉（連橫）"],"writing":"知性寫作：批判性思考並反思〈台灣通史序〉之歷史觀與時代侷限，寫作思辨短文"}],"keySkills":["魏晉南北朝至明清文藝思潮（古文運動、性靈說、擬古派、桐城派）之發展與梳理","高階文言句型與詞性活用（包括意動用法、使動用法、名詞作動詞等語法規則）","近體詩與古體詩格律深度比較（字數、句數、平仄、對仗、換韻自由度之差異）","學測國寫情意題兩大核心：具體事物的五感細節精細描摹、由景入情並昇華至生命價值","文學象徵意象體系之建立（如：月、水、鏡、柳、松在中國古典文學中的演變意含）"],"assessment":["古代文學史思潮演變、文言語法活用與古典詩詞格律之學術性紙筆測驗。","情意寫作限時挑戰：比照學測標準，於50分鐘內現場寫作「溫暖的心靈印記」並進行評分。","學術小論文撰寫實作：針對「赤壁賦與蘭亭集序之生死觀與豁達境界比較」撰寫1200字小論文。"]},{"grade":"高中三年級","stage":"高中","goal":"總整中學語文與人文學術素養，衝刺學測國寫雙題，奠定大學通識與終身批判性思辨力。","abilities":["能融會貫通十五篇文言經典與現當代文學，自如進行跨文本、跨時代之比較閱讀。","具備高水準的批判性閱讀力，能迅速洞悉論述中的邏輯謬誤並進行結構完整的反駁。","能於學測大考規定時間（90分鐘雙題）內，自如、流暢、深刻地完成知性與情意雙篇寫作。","掌握大學學術寫作規範，能撰寫結構嚴謹、文獻參照正確之專題探究小論文。","能靈活將豐富的語文素養與文化底蘊，展現於日常、面試或學術演說等口頭發表中。"],"units":[{"title":"先秦思想與說理散文","focus":"跨文本比較先秦諸子治理哲學與現代應用","texts":["〈諫逐客書〉（李斯）","〈莊子·秋水〉（莊周）"],"writing":"知性寫作：以「先秦諸子如何看待現代社群媒體資訊爆炸亂象」為題，撰寫600字思辨散文"},{"title":"學測知性題衝刺：思辨說理","focus":"限時模擬學測知性題，優化結構與邏輯","texts":["〈學測歷屆知性經典題型彙編〉（大考中心）","〈當代公共政策議題論述與思辨〉（學術講義）"],"writing":"知性寫作：限時40分鐘，現場完成一篇500字、結構嚴整且多角度論證之知性說理作文"},{"title":"學測情意題衝刺：審美抒情","focus":"限時模擬學測情意題，昇華經驗與價值","texts":["〈學測歷屆情意經典題型彙編〉（大考中心）","〈當代情感書寫與生命經驗轉化〉（寫作講義）"],"writing":"情意寫作：限時45分鐘，現場完成一篇650字、層次豐富且寓理於景之情意抒情作文"},{"title":"當代台灣文學與文明課題","focus":"探討台灣戰後至當代都市書寫與生態省思","texts":["〈散戲〉（洪醒夫）","〈溪澗的旅次〉（劉克襄）"],"writing":"知性與情意融合：以「科技浪潮下被消逝的時光與文化記憶」為題，撰寫800字綜合長文"},{"title":"古代公文與奏議之章法美學","focus":"賞析古代奏章的論證智慧與外交辭令高度","texts":["〈出師表〉（諸葛亮）","〈諫太宗十思疏〉（魏徵）"],"writing":"知性寫作：分析魏徵在〈十思疏〉中如何運用比喻與排比，向君王進行「無傷大雅的規勸」"},{"title":"古典戲曲與小說的流變","focus":"整理雜劇、傳奇與明清章回小說發展脈絡","texts":["〈牡丹亭·驚夢〉（湯顯祖）","〈水滸傳·林教頭風雪山神廟〉（施耐庵選段）"],"writing":"情意寫作：戲劇轉譯，將〈驚夢〉或〈林教頭風雪山神廟〉之關鍵對話改寫為現代舞台劇劇本"},{"title":"世界經典思想與跨文化對話","focus":"閱讀西方人文譯作，開拓全球思維格局","texts":["〈論自由〉節選（約翰·密爾）","〈為什麼讀經典〉（卡爾維諾）"],"writing":"知性寫作：撰寫一篇600字之學術書評，探討西方自由思想在當代亞洲實踐的挑戰"},{"title":"終身語文素養與大學起跑","focus":"總整十二年語文素養，接軌大學報告與表達","texts":["〈大學小論文寫作指南〉（學術寫作講義）","〈學術口語表達與面試〉（表達講義）"],"writing":"實作：自選個人高中生涯一項探究主題，寫作一份800字之大學研究計畫與自我發展規畫書"}],"keySkills":["學測大考國語文綜合能力（國綜）之核心題型（包含多文本、文意辨析、學術常識）大考模擬總整","學測國寫知性題終極心法：邏輯一致性、雙邊論證、合理推論與駁論、多元資料數據統整","學測國寫情意題終極心法：虛實相生、感官聯覺、情感轉承、個人經驗與人類永恆價值的對接","十五篇文言古文與歷屆經典大考範文寫作章法（如：對比、層遞、正反對照、寓理於事）之整合","跨學科閱讀理解與寫作之段落佈局：雙軌結構、漸進式結構與立體論點融會技巧"],"assessment":["大考模擬實戰：90分鐘內於現場不翻書完成國寫雙題（知性+情意），由專家教師群予以精確級分與講評。","新型學測大考綜合難度模擬試卷：包含高強度文言/白話閱讀測驗、國學常識與應用文等紙筆測試。","學術簡報與口頭發表評量：舉辦「我高中三年的探究歷程與自我成長」5分鐘個人品牌演說與現場答辯評分。"]}];
+var SIG=[{"id":"writing-thesis","title":"學測國寫知性題速成：用『論證三箭』打造高分邏輯鏈","tagline":"學會邏輯推論與審題四問，讓你的議論文章理直氣壯、層次分明！","target":"高中一至三年級","category":"寫作","objectives":["掌握「審題四問」法，迅速釐清論題核心與寫作要求","學會「論證三箭」結構（論點、論據、論證），建立嚴密的邏輯鏈結","練習提取與重組圖表/文獻資訊，轉化為有力的寫作素材"],"rundown":[{"time":"0:00-0:40","activity":"【起：審題四問】知性題解碼","detail":"老師介紹審題四問（是什麼、為什麼、如何做、若不然），引導學生剖析近五年學測知性題型。學生分組進行考題關鍵字圈選與論點定位練習。"},{"time":"0:40-1:20","activity":"【承：論證三箭】邏輯框架建構","detail":"老師講授「論證三箭」（主張、理由、證據）黃金三角結構。學生現場挑選爭議性議題，動筆撰寫150字的「黃金論證段」，由老師即時抽樣修潤。"},{"time":"1:20-1:30","activity":"【中場休息】大腦重整與充電","detail":"學生休息與自由討論，老師解答個別學生關於前半堂邏輯架構建構的疑問，並準備下一階段的圖表與文獻資訊提取教材。"},{"time":"1:30-2:10","activity":"【轉：圖表降魔】資訊提取與轉化","detail":"老師示範如何從複雜的統計圖表或長文中快速抓取數據、對比關係。學生練習將圖表數據「文字化」，並融入自己的論證中作為強力論據。"},{"time":"2:10-2:50","activity":"【合：實戰演練】高分範文與限時寫作","detail":"老師解析學測高分樣卷的結構美學。學生在限定的40分鐘內，針對全新知性模擬題，現場撰寫一篇500字以上的知性論述短文。"},{"time":"2:50-3:00","activity":"【中場休息】寫作後的靜心整理","detail":"學生停筆並進行深呼吸休息。老師收集學生的實戰文章，並快速瀏覽、篩選出具代表性（優點或典型錯誤）的段落進行拍照投影準備。"},{"time":"3:00-3:40","activity":"【評：同儕互評與名師診斷】精準修改","detail":"老師投影代表性學生作品，示範如何進行「外科手術式」的句子與邏輯修潤。學生依據互評檢核表進行兩兩互評，並動手修改自己的弱項段落。"},{"time":"3:40-4:00","activity":"【總：一招致勝】口訣與學習總結","detail":"老師總結「論證三箭」核心口訣，發放「知性寫作萬用口袋卡」。學生發表今日最深刻的學習痛點與突破，完成整堂課的學習反思單。"}],"materials":["學測國寫知性題近五年真題與評分原則講義","論證三箭與審題四問萬用口袋卡","經典圖表與文獻資訊提取實戰練習本","知性寫作專用稿紙與同儕互評檢核表"],"output":"一篇500字以上、結構嚴謹且富含邏輯鏈結的學測知性題實戰文章","assessment":["利用「論證三箭檢核表」，評估論點、理由與證據之間是否存在邏輯謬誤與斷裂","根據圖表資訊轉化完整度，評估學生是否精準提取並適當運用數據作為論據"],"takeaway":"審題四問明方向，論證三箭射紅心"},{"id":"writing-narrative","title":"國中會考作文專攻：用『五感顯微鏡』寫出滿級分故事","tagline":"告別流水帳！學會五感摹寫與以小見大，讓日常小事化為動人篇章。","target":"國中一至三年級、國小高年級","category":"寫作","objectives":["學會使用「五感顯微鏡」法，將抽象情感具體化為細膩的感官細節","掌握「以小見大」的素材提煉法，從平凡日常中挖掘不平凡的深刻體悟","熟練運用「起承轉合的變體」──倒敘法與懸念法，提升文章吸睛度"],"rundown":[{"time":"0:00-0:40","activity":"【起：五感喚醒】感官顯微鏡下的細節","detail":"老師利用「神祕箱」或「多媒體影音」引導學生進行視覺、聽覺、觸覺、嗅覺、味覺的聯想。學生練習將「我很難過」轉化為三句不同的五感摹寫。"},{"time":"0:40-1:20","activity":"【承：以小見大】素材銀行的日常淘金","detail":"老師講授「以小見大」法，示範如何從一隻原子筆、一頓早餐寫到親情與成長。學生建立個人的「回憶素材庫」，挑選三個日常物件進行意象聯結。"},{"time":"1:20-1:30","activity":"【中場休息】感官放鬆與意象沉澱","detail":"學生閉目聆聽輕音樂，放鬆感官。老師個別輔導在素材庫建立中遇到困難的學生，給予具體的聯想提示，並布置下一階段的寫作演練道具。"},{"time":"1:30-2:10","activity":"【轉：結構變形】倒敘與懸念的剪輯美學","detail":"老師分析會考滿級分樣卷的結構美學，重點解說「倒敘法」與「衝突法」。學生將平鋪直敘的「我的假期」大綱，重新剪輯為具有懸念的電影感大綱。"},{"time":"2:10-2:50","activity":"【合：實戰狂飆】會考模擬題限時創作","detail":"老師公布精選會考模擬題（如：那一次，我重新認識了自己）。學生在限定的40分鐘內，運用五感與倒敘法，當堂撰寫500字以上的敘事抒情文。"},{"time":"2:50-3:00","activity":"【中場休息】寫作能量恢復","detail":"學生停筆進行手指拉伸與休息。老師迅速收齊稿紙，瀏覽學生的寫作成果，挑選出兩篇在「感官描寫」與「結構剪輯」上表現優異或有典型通病的文章。"},{"time":"3:00-3:40","activity":"【評：微整形診所】現場投影與句子優化","detail":"老師投影挑選出的段落，引導學生集體診斷。進行「詞彙微整形」，將平庸詞彙改裝為生動詞彙。學生依據評分表自評，並修改自己文章中最乾癟的三個句子。"},{"time":"3:40-4:00","activity":"【總：帶走一招】五感口訣與反思","detail":"老師總結「五感顯微鏡」與「以小見大」的核心口訣。學生撰寫學習反思卡，帶走「寫作顯微卡」，完成這堂濃縮的滿分會考作文課。"}],"materials":["會考滿級分敘事抒情文範文集","五感喚醒引導道具（精油、特殊材質卡片、音效檔）","以小見大素材淘金學習單與寫作顯微卡","會考專用模擬稿紙與微整形檢核表"],"output":"一篇500字以上、具備豐富感官細節與獨特結構的會考規格敘事抒情文","assessment":["檢視文章中是否包含至少三種感官摹寫，且描寫細緻度能使讀者產生共鳴","評估文章是否展現「以小見大」的深度，而非停留於表面的事件平鋪直敘"],"takeaway":"感官放大寫細節，日常小事見大智"},{"id":"writing-creative","title":"學測國寫情意題：用『意象投射法』寫出高級感散文","tagline":"拒絕無病呻吟！學會情景交融與意象對比，讓你的情意文章深邃動人。","target":"高中一至三年級","category":"寫作","objectives":["掌握「意象投射」技巧，將抽象情感寄託於具體物件或自然景觀中","學會「情景交融」的三種結構模式，使文章景中有情、情中有景","精煉文字美感，運用意象對比與隱喻，提升文章的文學性與高級感"],"rundown":[{"time":"0:00-0:40","activity":"【起：意象密碼】物件的情感代碼","detail":"老師介紹「意象」概念，拆解經典散文中的意象（如朱自清的背影與橘子、簡媜的紅絲線）。學生挑選一個「代名詞物件」進行情感投射與隱喻造句。"},{"time":"0:40-1:20","activity":"【承：情景交融】三種融合結構大公開","detail":"老師講授觸景生情、借景抒情、情景並茂三種結構模式。學生練習將一段純抒情的文字，改寫為結合「光影、色彩、氣味」的情景交融段落。"},{"time":"1:20-1:30","activity":"【中場休息】心靈沉澱與美感孕育","detail":"學生聆聽大自然環境音（雨聲、風聲、潮汐），沉澱情緒。老師巡視解答學生意象隱喻轉換的瓶頸，並準備下一階段的意象對比圖卡。"},{"time":"1:30-2:10","activity":"【轉：意象對比】用衝突營造文學深度","detail":"老師教學「意象對比」法（如冷與熱、明與暗、動與靜）。學生分組利用對比圖卡，設計一段充滿張力的情意過渡段，現場發表並由老師點評。"},{"time":"2:10-2:50","activity":"【合：實戰演練】情意題限時抒寫","detail":"老師釋出模擬學測情意題（如：溫暖的心靈角落）。學生在限定的40分鐘內，靈活運用今日所學的意象投射與情景交融，撰寫550字的情意散文。"},{"time":"2:50-3:00","activity":"【中場休息】情緒抽離與眼部放鬆","detail":"學生停筆進行眼部放鬆。老師收回稿紙，針對學生的「意象使用」與「情感飽滿度」進行快速篩選，挑選出具啟發性的段落準備投影。"},{"time":"3:00-3:40","activity":"【評：美感升級】文字煉金術與微型雕琢","detail":"老師投影學生作品，帶領全班進行「文字煉金術」，刪除多餘贅字，將直白的句子修潤得婉轉優美。學生依照「意象含金量量表」對同儕作品進行評估。"},{"time":"3:40-4:00","activity":"【總：帶走一招】情意口訣與課後延伸","detail":"老師歸納情意寫作口訣，分發「文學感詞彙靈感卡」。學生撰寫今日寫作心路歷程反思，為這堂充滿文學美感的寫作課畫下句點。"}],"materials":["學測情意題高分卷分析講義","情景交融結構圖解與文學感詞彙靈感卡","多媒體自然環境音效與情感投影圖卡","情意題專用寫作稿紙與意象含金量量表"],"output":"一篇550字以上、意象鮮明、情景交融且文字精練的高級感抒情散文","assessment":["根據「意象含金量量表」，評估文章是否成功運用具體意象寄託抽象情感","檢視文章是否達成「情景交融」，而非只有直白的敘事與蒼白的抒情"],"takeaway":"情感寄託於意象，景物著色情自深"},{"id":"writing-review","title":"時事評論速成班：用『黃金三段論』打造理性的思辨武器","tagline":"別再各說各話！掌握經典邏輯思維與層遞論證，寫出擲地有聲的評論。","target":"國三～高三","category":"寫作","objectives":["掌握「三段論法」與「歸納/演繹」邏輯，建立無懈可擊的論證基礎","學會使用「駁論與立論」的交鋒技巧，提升評論文章的說服力與層次感","建立專屬的「論據素材庫」，學會靈活調用歷史典故與時事數據"],"rundown":[{"time":"0:00-0:40","activity":"【起：邏輯除雷】常見邏輯謬誤大掃蕩","detail":"老師投影日常新聞與網路言論，引導學生引出「滑坡謬誤」、「稻草人謬誤」等邏輯雷區。學生分組進行「邏輯除雷」挑戰賽，釐清邏輯邊界。"},{"time":"0:40-1:20","activity":"【承：黃金三段】大前提、小前提、結論","detail":"老師講授亞里斯多德「三段論法」及「駁論三步走」。學生挑選當紅社會時事（如人工智慧與人類就業），現場寫出一個包含駁論與立論的論證大綱。"},{"time":"1:20-1:30","activity":"【中場休息】思維降溫與飲水休息","detail":"學生暫停燒腦的邏輯思考。老師個別指導在駁論架構上遇到邏輯死胡同的學生，並分發下一階段所需的經典論據卡。"},{"time":"1:30-2:10","activity":"【轉：論據點石】如何將老梗寫出新意","detail":"老師示範如何將司馬遷、愛因斯坦等「萬用老梗」或「當代時事數據」重新包裝、精準剪裁。學生練習將同一個論據套入兩個截然不同的論點中。"},{"time":"2:10-2:50","activity":"【合：實戰短評】45分鐘時事評論寫作","detail":"老師給予一則爭議性社會新聞（如：智慧型手機應否全面禁止進入校園）。學生在限定的40分鐘內，運用三段論與駁論法，撰寫一篇600字時事短評。"},{"time":"2:50-3:00","activity":"【中場休息】思維舒緩與稿件整理","detail":"學生停筆放鬆。老師收回短評，快速篩選出邏輯鏈嚴密、或有典型「套路化」痕跡的兩種類型文章，準備進行下一階段的深度剖析。"},{"time":"3:00-3:40","activity":"【評：邏輯法庭】論證交鋒與句子精鍊","detail":"老師將課堂化身「邏輯法庭」，投影學生段落，引導學生攻防其邏輯漏洞。學生依據「論證銳利度檢核表」進行交叉互評，並修正自己的論證漏洞。"},{"time":"3:40-4:00","activity":"【總：帶走一招】黃金三段口訣與反思","detail":"老師總結「黃金三段論」口訣，發放「邏輯修辭萬用卡」。學生撰寫今日反思，總結如何在高度爭議的議題中，保持冷靜理性的文字力量。"}],"materials":["經典邏輯謬誤與論證三段論教學講義","爭議性社會時事剪報與多元論據卡","時事評論寫作專用稿紙與論證銳利度檢核表","邏輯修辭萬用口袋卡"],"output":"一篇600字以上、邏輯嚴密、包含駁論與立論結構的時事評論文章","assessment":["根據「論證銳利度檢核表」，評估文章是否有明確的三段論結構與合理的因果推論","檢視文章在面對反方立場時，是否能提出有說服力的駁論，而非流於情緒謾罵"],"takeaway":"大前提立穩，小前提推進，結論自然成"},{"id":"writing-description","title":"文字導演養成記：用『蒙太奇分鏡』寫出畫面感小說","tagline":"讓讀者在你的文字裡看電影！掌握分鏡、轉場與節奏，寫出戲劇張力。","target":"國二～高三","category":"寫作","objectives":["掌握「文字分鏡」技術，學會用特寫、中景、遠景來調度文章畫面","學會「時間蒙太奇」與「空間蒙太奇」，在文章中流暢進行場景與時空轉場","理解「冰山理論」，學會用對話與動作暗示角色內心，拒絕直白平鋪"],"rundown":[{"time":"0:00-0:40","activity":"【起：文字鏡頭】特寫與遠景的調度","detail":"老師播放經典電影片段，拆解導演如何使用特寫、遠景。學生練習將一段平淡的文字（他走進教室），改寫成包含「腳步特寫」到「教室全景」的分鏡段落。"},{"time":"0:40-1:20","activity":"【承：轉場藝術】文字的蒙太奇剪輯","detail":"老師講授「文字蒙太奇」，示範如何利用氣味、聲音、光線變化在文字中「轉場」。學生練習將兩個不相關的時空（現在與童年），用一聲鳥鳴流暢串聯。"},{"time":"1:20-1:30","activity":"【中場休息】電影中場與創意伸展","detail":"學生休息，教室播放經典電影配樂。老師針對在時空轉場中感到混亂的學生進行一對一引導，並分發下一階段的「角色衝突卡」。"},{"time":"1:30-2:10","activity":"【轉：冰山理論】用動作說故事，不用旁白說破","detail":"老師介紹海明威「冰山理論」。示範用動作暗示內心（如捏碎紙杯而非說生氣）。學生分組，抽取角色衝突卡，撰寫一段純動作與對話的對手戲。"},{"time":"2:10-2:50","activity":"【合：導演開拍】45分鐘微型小說創作","detail":"老師給予限定情境（如：公車上的重逢）。學生在限定的40分鐘內，擔任文字導演，運用分鏡、轉場與冰山理論，撰寫一篇600字左右的極短篇小說。"},{"time":"2:50-3:00","activity":"【中場休息】拍片結束的喘息","detail":"學生停筆。老師收齊小說手稿，快速瀏覽，篩選出在「畫面感建立」與「懸念設計」上特別出彩或有「流水帳傾向」的代表性作品。"},{"time":"3:00-3:40","activity":"【評：試映會】投影拉片與細節調校","detail":"老師投影學生作品，帶領全班像「導演拉片」一樣，一格一格分析文字。學生使用「分鏡畫面感檢核表」互評，挑選出最精彩的「名場面」進行文字優化。"},{"time":"3:40-4:00","activity":"【總：導演殺青】分鏡口訣與創作卡","detail":"老師總結「文字導演」分鏡口訣，發放「小說創作分鏡卡」。學生撰寫今日反思，分享如何從「用筆寫」跨越到「用鏡頭寫」的思考轉變。"}],"materials":["文字蒙太奇與電影分鏡圖解講義","小說角色衝突卡與分鏡靈感卡","微型小說創作稿紙與分鏡畫面感檢核表","經典電影分鏡對照影音教材"],"output":"一篇600字左右、畫面感極強、結構富有電影張力的微型小說","assessment":["根據「分鏡畫面感檢核表」，評估文章是否展現出遠景、中景、特寫等文字鏡頭感","評估文章是否運用「冰山理論」，透過對話與動作展現人物情感，而非平鋪直敘"],"takeaway":"文字作鏡頭，分鏡寫畫面，情深藏冰山"},{"id":"reading-classical","title":"文言文無痛速讀法：用『語法地圖』解碼經典文獻","tagline":"文言文非外星文！學會結構解碼與虛詞推導，四小時看懂文言長文。","target":"國二～高三","category":"閱讀","objectives":["掌握文言文「倒裝、省略、被動」三大句型結構，建立文言語法地圖","熟練掌握15個高頻文言虛詞（如：之、其、以、而、於）的萬用推導法","學會「上下文脈絡推估法」，在不查字典的情況下準確猜出陌生字詞的字義"],"rundown":[{"time":"0:00-0:40","activity":"【起：解鎖地圖】三大文言奇特語法大破解","detail":"老師將文言文句法與現代漢語進行對比，解碼「主賓倒裝、省略主語、被動句」。學生進行「語序重組遊戲」，將倒裝文言句重組為通順的現代漢語。"},{"time":"0:40-1:20","activity":"【承：虛詞密碼】高頻虛詞的降維打擊","detail":"老師講解「之、其、以、而、於」等核心虛詞的字意演變與分類樹。學生分組，使用「虛詞多功能卡牌」，進行現場句型配對與字義推理競賽。"},{"time":"1:20-1:30","activity":"【中場休息】古漢語腦力修復","detail":"學生進行休息與腦力放鬆。老師解答個別學生關於虛詞多重字義推導的疑問，並在黑板上畫出下一階段所需的「脈絡推理樹」示意圖。"},{"time":"1:30-2:10","activity":"【轉：脈絡通靈】陌生字義的上下文偵探術","detail":"老師傳授「形聲字偏旁推意法」與「駢偶對應推字義法」。學生扮演「文字偵探」，在一篇刻意隱去關鍵字的文言短文中，利用上下文合理解密陌生字。"},{"time":"2:10-2:50","activity":"【合：實戰通關】長篇文言文限時閱讀與解題","detail":"老師發放篇幅較長、難度中高（如《聊齋誌異》或《世說新語》選段）的陌生文言文。學生在40分鐘內運用語法地圖與推估法，獨立完成閱讀理解與結構心智圖。"},{"time":"2:50-3:00","activity":"【中場休息】閱讀後的視力與精神放鬆","detail":"學生停筆放鬆。老師收回心智圖，快速檢視學生對於文章結構掌握的準確度，並挑選出兩份在「省略主語還原」上有代表性錯誤的心智圖。"},{"time":"3:00-3:40","activity":"【評：解碼公審】結構還原與文義爭鋒","detail":"老師投影心智圖，帶領學生進行「主語還原大作戰」，現場釐清是誰說了話、做了事。學生對照「文言解碼精準度量表」進行互評，修正彼此的誤讀處。"},{"time":"3:40-4:00","activity":"【總：帶走一招】語法口訣與通關卡","detail":"老師總結文言文速讀核心口訣，發放「文言虛詞萬用口袋卡」。學生完成學習反思單，帶走解碼文言文的信心與一招致勝的速讀地圖。"}],"materials":["三大文言句型結構與高頻虛詞分析講義","虛詞多功能推理卡牌組","精選長篇文言閱讀文本與解密學習單","文言虛詞萬用口袋卡與文言解碼精準度量表"],"output":"一份精準還原省略主語、釐清情節發展的文言長文結構心智圖","assessment":["根據「文言解碼精準度量表」，評估學生是否能正確還原文言文中省略的主語與賓語","檢視學生是否能利用偏旁與上下文脈絡，正確推導出文中三個陌生字詞的合理字義"],"takeaway":"主語找出來，虛詞定方向，倒裝調回來"},{"id":"expression-oratory","title":"演說與口語表達：用『黃金圈理論』說服世界","tagline":"上台不再發抖！掌握黃金圈結構與肢體氣場，4小時成為說服力大師。","target":"國一～高三","category":"表達","objectives":["掌握「黃金圈理論」（Why-How-What）溝通結構，建立極具說服力的演說邏輯","學會使用「聲音表情」與「非語言符號」（肢體、眼神、手勢），營造強大氣場","克服上台恐懼，學會「呼吸控制」與「定錨法」，在任何場合都能從容表達"],"rundown":[{"time":"0:00-0:40","activity":"【起：氣場破冰】解鎖身體與聲音的能量","detail":"老師帶領學生進行腹式呼吸、發音共鳴練習，並傳授「超人站姿」定錨法。學生現場兩兩一組，練習用「堅定的眼神與握手」進行自我介紹破冰。"},{"time":"0:40-1:20","activity":"【承：思維重構】黃金圈說服邏輯大拆解","detail":"老師講授西蒙·西奈克的「黃金圈理論」（從為什麼開始）。引導學生剖析經典TED演講。學生挑選一個個人熱愛的事物，用黃金圈架構撰寫1分鐘講稿大綱。"},{"time":"1:20-1:30","activity":"【中場休息】喉嚨休養與能量補給","detail":"學生飲水、休息並放鬆喉部肌肉。老師個別輔導在「Why」的挖掘上遇到困難、流於產品功能介紹的學生，並布置下一階段的「非語言調度」道具。"},{"time":"1:30-2:10","activity":"【轉：非言魅力】手勢、眼神與聲音的三重奏","detail":"老師拆解演說家常用的「黃金三角手勢」與「眼神定格術」。學生現場上台，在不使用字詞的情況下，僅靠「聲音語氣與肢體」傳達三種截然不同的情緒。"},{"time":"2:10-2:50","activity":"【合：實戰登台】2分鐘黃金圈短講挑戰","detail":"學生利用30分鐘進行講稿精煉與演練。隨後，每位學生依據黃金圈結構，進行2分鐘的「影響力短講」，由全班同學與老師共同錄影記錄。"},{"time":"2:50-3:00","activity":"【中場休息】登台後的緊張釋放","detail":"學生回到座位放鬆。老師迅速整理錄影檔案，篩選出兩段在「肢體語言」與「邏輯推進」上最能作教材的學生短講影片準備投影。"},{"time":"3:00-3:40","activity":"【評：大師影評會】影片回放與精細修正","detail":"老師投影播放篩選出的短講影片，以「無聲回放」與「倍速播放」分析學生的眼神與手勢。學生依據「黃金圈演說評估表」進行自評與兩兩互評。"},{"time":"3:40-4:00","activity":"【總：帶走一招】演說口訣與反思收穫","detail":"老師總結「黃金圈演說」核心口訣，發放「演說急救包卡」。學生撰寫個人登台反思，寫下自己從發抖到發光的蛻變關鍵，圓滿結束。"}],"materials":["黃金圈演說結構與非語言魅力講義","經典TED演講拆解影片與投影設備","2分鐘短講計時器與黃金圈演說評估表","演說急救包口袋卡與手機錄影設備"],"output":"一段2分鐘、架構完整且展現良好肢體氣場的「黃金圈說服短講」現場錄影","assessment":["根據「黃金圈演說評估表」，檢視短講是否嚴格遵循「Why-How-What」的邏輯順序","評估學生的眼神接觸是否覆蓋全場，以及手勢是否與講述重點同步且具加分效果"],"takeaway":"先說為什麼，手勢帶節奏，眼神定乾坤"},{"id":"literature-deep","title":"經典文本深度導讀：用『角色同理地圖』讀懂人性光影","tagline":"不讀死書！用現代視視角重讀經典，掌握人物動機與衝突的剖析大師。","target":"國三～高三","category":"文學","objectives":["掌握「角色同理地圖」（Empathy Map）分析法，深度剖析文學人物的內心動機","學會「歷史同理心」思維，將經典人物置於時代背景中理解其無奈與選擇","練習「跨時空批判性思考」，建立經典文本與現代個人生活經驗的對話鏈結"],"rundown":[{"time":"0:00-0:40","activity":"【起：跨越時空】與古人的靈魂對談","detail":"老師介紹經典人物（如屈原、蘇軾或張愛玲筆下人物）。利用「現代場景代入」（如：如果蘇軾有IG），引導學生破除時空藩籬，建立初步同理。"},{"time":"0:40-1:20","activity":"【承：人性地圖】角色同理心大作戰","detail":"老師講授「角色同理地圖」的六大維度（想、聽、看、說、痛、得）。學生分組選擇經典文本中的核心衝突角色，動手繪製巨幅「角色同理地圖」。"},{"time":"1:20-1:30","activity":"【中場休息】人文情懷沉澱與漫步","detail":"學生在教室內觀看其他組別的角色地圖初稿。老師巡視解答各組對於角色「痛點」與「得著」拿捏不準的疑問。"},{"time":"1:30-2:10","activity":"【轉：衝突剖析】核心悲劇的冰山與和解","detail":"老師帶領分析文本中的「人際衝突」與「社會壓迫」。學生在同理地圖上標示出角色的「關鍵轉折點」，並討論如果換作現代人會如何抉擇。"},{"time":"2:10-2:50","activity":"【合：靈魂對話】寫給古人的一封跨時空信札","detail":"學生在限定的40分鐘內，選擇今日導讀的人物，以同理地圖為基礎，撰寫一封500字「跨時空的對話信札」，表達對其命運的理解、質疑或現代詮釋。"},{"time":"2:50-3:00","activity":"【中場休息】心靈對話後的沈澱","detail":"學生停筆。老師收回信札，快速瀏覽學生在信中展現的批判性思維與同理深度，挑選兩篇論點獨特、令人耳目一新的信札段落準備投影。"},{"time":"3:00-3:40","activity":"【評：靈魂沙龍】同儕共鳴與文本重構","detail":"老師投影挑選出的信札，帶領全班像「讀書會沙龍」一樣，討論學生對經典人物的獨特詮釋。學生根據「同理心與批判性檢核表」進行交叉給予回饋。"},{"time":"3:40-4:00","activity":"【總：帶走一招】文學反思與人性卡","detail":"老師總結經典閱讀口訣，發放「經典人物同理卡」。學生寫下今日學習反思，思考如何將閱讀經典轉化為理解身邊人與自身的智慧。"}],"materials":["精選經典文學文本（如《記承天寺夜遊》、《傾城之戀》選段）","角色同理地圖巨幅工作海報與彩色馬克筆","跨時空信札專用信箋與同理心檢核表","經典人物同理口袋卡與讀書會引導提問單"],"output":"一份精準繪製的角色同理地圖，以及一篇500字、兼具歷史同理與現代批判的跨時空對話信札","assessment":["根據「同理心與批判性檢核表」，評估同理地圖是否精準抓出角色的深層心理與時代限制","評估信札內容是否展現出「跨時空對話」的深度，而非單純的文本摘要或空泛同情"],"takeaway":"畫出同理地圖，看清时代限度，讀懂人性光影"}];
+var QBANK=[{"level":"國小","topic":"字音字形","q":"下列哪一組字「」中的注音完全相同？","options":["「背」書／「背」包","「興」奮／「興」趣","「當」天／「當」做","「落」葉／「落」枕"],"ans":2,"exp":"「當天」與「當做」皆讀ㄉㄤ。(A)讀ㄅㄟˋ與ㄅㄟ；(B)讀ㄒㄧㄥ與ㄒㄧㄥˋ；(D)讀ㄌㄨㄛˋ與ㄌㄠˋ。故選 (C)。"},{"level":"國小","topic":"字音字形","q":"下列選項中，哪一個詞語的字形完全正確？","options":["不屑一顧","消聲匿跡","穿流不息","再接再勵"],"ans":0,"exp":"「不屑一顧」字形完全正確。(B)「消」聲匿跡應為「銷」；(C)「穿」流不息應為「川」；(D)再接再「勵」應為「厲」。故選 (A)。"},{"level":"國小","topic":"字音字形","q":"「這個國家的科技發達，人民生活富□。」空格中應填入哪一個字？","options":["庶","裕","預","語"],"ans":1,"exp":"「富裕」意為財物豐富、充裕，故應填「裕」。(A)「富庶」指人多物豐；(C)與(D)字形及字義皆不符句意。故正確答案為 (B)。"},{"level":"國小","topic":"字音字形","q":"下列哪一個字的部首是錯誤的？","options":["「聞」：耳部","「美」：大部","「初」：刀部","「晨」：日部"],"ans":2,"exp":"「初」字從衣從刀，部首為「衣」部（衣字旁），而非「刀」部。其他選項如「聞」為耳部、「美」為大部、「晨」為日部，部首標示皆正確無誤。故選 (C)。"},{"level":"國小","topic":"字音字形","q":"下列各組字形相近的字，哪一組讀音「不同」？","options":["「晴」朗／眼「睛」","「跳」躍／「桃」樹","「防」守／「妨」礙","「帳」篷／「脹」大"],"ans":3,"exp":"「帳」與「脹」讀音皆為ㄓㄤˋ。(A)為ㄑㄧㄥˊ與ㄐㄧㄥ；(B)為ㄊㄧㄠˋ與ㄊㄠˊ；(C)為ㄈㄤˊ與ㄈㄤˇ，讀音皆不相同。故選 (D)。"},{"level":"國小","topic":"字音字形","q":"下列「」中的字，哪一個筆畫數最少？","options":["「囊」螢照書","「屬」於","「麗」日和風","「鬱」鬱蔥蔥"],"ans":2,"exp":"「麗」字為19畫。「囊」字為22畫；「屬」字為21畫；「鬱」字為29畫。因此四個選項中，筆畫數最少的是「麗」字，故正確答案應選擇2。"},{"level":"國小","topic":"詞語成語","q":"「由於平時有充分的準備，他今天上台演說時顯得□□□□。」空格中最適宜填入哪一個成語？","options":["談笑風生","從容不迫","手忙腳亂","口若懸河"],"ans":1,"exp":"「從容不迫」形容沉著鎮靜，不慌不忙，最契合「平時有充分準備」的語境。(A)偏重談話風趣；(C)為反義；(D)指能言善道。故選 (B)。"},{"level":"國小","topic":"詞語成語","q":"下列「」中的詞語，哪一個運用「不恰當」？","options":["他做事向來「認真」，深受老師喜愛","這場球賽精采絕倫，真讓人「興高采烈」","弟弟跌倒了，痛得「號啕大哭」","經過一番努力，他「終於」實現了夢想"],"ans":1,"exp":"「興高采烈」常用於形容人興致勃勃，不可用來修飾「球賽」本身，可改為「熱血沸騰」。其他選項如「認真」、「號啕大哭」、「終於」運用皆正確。故選 (B)。"},{"level":"國小","topic":"詞語成語","q":"「班長做事一向認真負責，今天卻遲到了，真是令人□□□□。」空格中填入哪一個成語最恰當？","options":["大失所望","百思不解","莫名其妙","喜出望外"],"ans":1,"exp":"「百思不解」指反覆思索也不能理解，最符合「一向認真卻反常遲到」令人困惑的語境。(A)語氣過重；(C)略帶貶義；(D)不符句意。故選 (B)。"},{"level":"國小","topic":"詞語成語","q":"下列各組詞語的關係，哪一組與其他三組「不同」？","options":["「保護」與「愛護」","「誠實」與「虛偽」","「喜悅」與「快樂」","「看望」與「拜訪」"],"ans":1,"exp":"「誠實」與「虛偽」兩者為反義詞關係。而(A)、(C)與(D)中的詞語兩兩皆為近義詞關係。因此，只有(B)的關係不同，故選 (B)。"},{"level":"國小","topic":"詞語成語","q":"下列哪一個詞語的字義與「時間極其短暫」無關？","options":["彈指之間","轉瞬即逝","千秋萬代","剎那"],"ans":2,"exp":"「千秋萬代」形容時間極其長久，與時間短暫無關。(A)「彈指之間」、(B)「轉瞬即逝」、(D)「剎那」皆形容時間極其短暫。故選 (C)。"},{"level":"國小","topic":"詞語成語","q":"「他從小就展現出音樂天分，不愧是個神童。」這句話中的「不愧」可以用下列哪一個詞語替換？","options":["不能","不配","不免","當之無愧"],"ans":3,"exp":"「不愧」表示當得起某種稱號，與(D)「當之無愧」意思最接近。(A)與(B)含意相反；(C)「不免」表示免不了。故正確答案為 (D)。"},{"level":"國小","topic":"修辭","q":"「微風吹過稻田，金黃色的稻穗便輕輕地彎下腰，向大地致敬。」這句話運用了哪一種修辭手法？","options":["比喻","排比","擬人","誇張"],"ans":2,"exp":"句中將稻穗賦予「彎下腰」、「向大地致敬」等人類才有的動作，使無情物具備人的動作與情感，這正是「擬人」修辭（屬於擬物/擬人中的人格化）。故選 (C)。"},{"level":"國小","topic":"修辭","q":"「這間屋子小得連轉個身都困難。」這句話主要運用了哪一種修辭手法？","options":["誇張","比喻","對比","設問"],"ans":0,"exp":"「小得連轉身都困難」是故意言過其實，將空間之小誇大到不合常理的程度，屬於「誇張」（誇飾）修辭。其他選項均無此類特徵，故本題正確答案為 (A)。"},{"level":"國小","topic":"修辭","q":"下列哪一個句子運用了「比喻」修辭？","options":["小明長得好像他的爸爸","天上的雲朵像一團團棉花糖","下雨了，小草開心地洗了個澡","難道我們不應該孝順父母嗎？"],"ans":1,"exp":"(B)將「雲朵」比喻成「棉花糖」，屬於比喻修辭。(A)為單純外貌比較；(C)為擬人修辭；(D)為設問（反問）修辭。故選 (B)。"},{"level":"國小","topic":"修辭","q":"「燕子去了，有再來的時候；楊柳枯了，有再青的時候；桃花謝了，有再開的時候。」這句話主要使用了哪一種修辭法？","options":["設問","對偶","排比","引用"],"ans":2,"exp":"本句由三個結構相同、語氣一致的句子排列而成，符合「排比」修辭的定義。這三句字數雖不完全相同，但句法結構高度平行，是典型排比。故選 (C)。"},{"level":"國小","topic":"文法標點","q":"下列句子中，標點符號使用完全正確的是哪一個？","options":["「媽媽說：」明天我們要去陽明山踏青。","我最喜歡的水果有、蘋果、香蕉和西瓜。","哇！這座城堡真是壯觀啊！","書架上擺放著：國語、數學、和英文等課本。"],"ans":2,"exp":"(C)標點正確。(A)引號範圍錯誤，冒號應在引號外；(B)頓號與有字連用不當；(D)「數學」後頓號與「和」字不應連用。故選 (C)。"},{"level":"國小","topic":"文法標點","q":"「在圖書館裡說話要輕聲細語□以免影響他人閱讀。」空格中填入哪一個標點符號最恰當？","options":["，","。","、","；"],"ans":0,"exp":"此處語氣尚未完結，且後句「以免影響他人閱讀」是承接前句的說明，故使用逗號「，」最為恰當。頓號用於並列詞語，句號用於句末，分號用於並列分句。故選 (A)。"},{"level":"國小","topic":"文法標點","q":"下列「」中的連接詞，哪一組使用「不恰當」？","options":["「雖然」下著大雨，「但是」他依然準時到達學校。","「不僅」妹妹會彈鋼琴，「而且」還彈得非常好。","「只要」你肯努力，夢想「就」有實現的一天。","「因為」今天天氣很好，「所以」我們去海邊看電影。"],"ans":3,"exp":"(D)中，去海邊與看電影並無合理因果關係，且與「天氣很好」之搭配不合常理。其他選項的關聯詞語與句意搭配皆十分通順且合乎邏輯。故選 (D)。"},{"level":"國小","topic":"文法標點","q":"「老師，這題數學題我不會做，您可以教我嗎」句末應該使用哪一種標點符號？","options":["句號（。）","驚嘆號（！）","問號（？）","冒號（：）"],"ans":2,"exp":"這句話是在向老師提出疑問並請求指導，具有詢問、請示的語氣，因此句末應該使用「問號（？）」，以表示疑問或請求。其他標點符號均不符合此處語境。故選 (C)。"},{"level":"國小","topic":"文法標點","q":"「□□颳風下雨，清潔隊員□會按時來清掃街道。」空格中應填入哪一組連接詞？","options":["即使……也……","因為……所以……","只要……就……","雖然……但是……"],"ans":0,"exp":"這句話表達的是一種假設的讓步關係，即使面對惡劣天氣（颳風下雨）這種極端情況，結果（按時清掃）依然不變，因此選(A)「即使……也……」最恰當。"},{"level":"國小","topic":"文法標點","q":"下列哪一個句子「沒有」語病？","options":["他把桌子上的灰塵打掃得乾乾淨淨。","聽了這個好消息，忍不住高興地跳了起來。","我們必須改掉不好的壞習慣。","這本故事書的內容非常豐富多彩。"],"ans":0,"exp":"(A)句意通順且無語病。(B)缺乏主詞「誰」忍不住高興；(C)「不好」與「壞習慣」語意重複；(D)「豐富多彩」與「內容」語意雜糅。故選 (A)。"},{"level":"國小","topic":"閱讀理解","q":"閱讀以下段落：「小草雖然微小，但它不怕狂風暴雨，總是緊緊抓住泥土，努力向上生長。」這段文字主要想表達小草的什麼精神？","options":["外表美麗","不畏艱難，生命力旺盛","喜歡與風雨玩耍","不自量力"],"ans":1,"exp":"文中提到小草「不怕狂風暴雨」、「努力向上生長」，強調其不畏懼惡劣環境、堅韌不拔的精神，故(B)「不畏艱難，生命力旺盛」最合適。其他選項均不符合文意。"},{"level":"國小","topic":"閱讀理解","q":"閱讀以下短文：「讀書就像旅行，可以帶我們去到從未去過的地方，認識各種奇妙的事物，開闊我們的視野。」這段話將「讀書」比作什麼？其好處是什麼？","options":["比作睡覺，好處是消除疲勞","比作旅行，好處是開闊視野","比作冒險，好處是鍛鍊身體","比作遊戲，好處是獲得快樂"],"ans":1,"exp":"文章第一句明確指出「讀書就像旅行」，並在後文提到「開闊我們的視野」，因此讀書是被比作旅行，其好處是開闊視野。(B)完全符合原文內容。故選 (B)。"},{"level":"國小","topic":"閱讀理解","q":"「發明大王愛迪生曾說：『天才是一分的天分，加上九十九分的汗水。』」這句話主要告訴我們什麼道理？","options":["天分比努力更重要","只要有天分，不需要努力","後天的努力與奮鬥才是成功的關鍵","流汗可以讓人變得更聰明"],"ans":2,"exp":"「九十九分的汗水」象徵極大的努力。這句話強調雖然天分重要，但後天的勤奮與努力才是成功的關鍵因素（佔了九成九），故選(C)。其他選項皆曲解了名言。"},{"level":"國小","topic":"閱讀理解","q":"閱讀以下對話：\n弟弟：「哥哥，為什麼影子有時候長，有時候短呢？」\n哥哥：「那與太陽在天空中的高度有關。太陽低時，影子就長；太陽高時，影子就短。」\n根據這段對話，下列敘述何者正確？","options":["影子的長短與太陽高度無關","中午時太陽最高，影子通常最短","傍晚時太陽最低，影子會最短","太陽越高，影子就會被拉得越長"],"ans":1,"exp":"根據對話「太陽高時，影子就短」，中午太陽最高，所以影子通常最短，(B)正確。(C)傍晚太陽低影子應長；(D)太陽高影子應短。故選 (B)。"},{"level":"國小","topic":"閱讀理解","q":"「一粒沙子可以看出一個世界，一朵野花可以看到一個天堂。」這句話主要在啟示我們什麼？","options":["要多去沙漠和花園走走","沙子和野花非常珍貴","只要細心觀察，生活中處處有美好","世界和天堂都是虛幻的"],"ans":2,"exp":"這句話隱含「以小見大」的哲理，啟示我們若能細心觀察、用心體會，即使是沙子、野花這般微小的事物，也能發現無限的美好與奧妙。故(C)最為貼切。"},{"level":"國小","topic":"閱讀理解","q":"「大自然是一本無字天書，高山是它的封面，河流是它的書頁，而每一種動植物都是裡面精采的文字。」這段話主要想傳達什麼？","options":["大自然中有很多書本可以閱讀","我們應該走入自然，用心探索學習","讀書比欣賞大自然更有意義","動植物會寫字給人類看"],"ans":1,"exp":"作者將大自然比喻為「無字天書」，將山川草木比為書的元素，意在鼓勵我們走進大自然、仔細觀察並向自然學習。其他選項皆不符合文學隱喻的本意。故選 (B)。"},{"level":"國小","topic":"閱讀理解","q":"「小傑今天提早一小時起床，不僅把房間收拾好，還主動幫全家人準備了早餐。媽媽看到後，驚訝得合不攏嘴。」媽媽「驚訝得合不攏嘴」的原因是什麼？","options":["因為小傑今天起得特別晚","因為小傑平日很少有這樣主動體貼的行為","因為早餐不好吃","因為媽媽生病了"],"ans":1,"exp":"媽媽「驚訝」是因為小傑的表現超乎平常（平日可能較少主動且體貼地早起做家事）。(A)與事實相反；第三、(D)文中均無提及。故(B)最合邏輯。"},{"level":"國小","topic":"閱讀理解","q":"「信賴是人與人之間交往的基石。一旦失去了信用，再美麗的諾言也只是空中樓閣。」這段話主要強調什麼的重要性？","options":["美麗諾言","空中樓閣","守信與互信","人際交往的技巧"],"ans":2,"exp":"文中指出信賴是基石，失去信用則一切流於空談，這直接強調了「守信與互信」在人際關係中的核心價值，故選(C)。其他選項皆未觸及這段話的核心主旨。"},{"level":"國中","topic":"字音字形","q":"下列各組「」中的字，哪一組讀音「不同」？","options":["「揠」苗助長／「偃」旗息鼓","「鍥」而不捨／提「挈」同行","「詬」罵不已／「逅」邂相逢","「鏗」鏘有力／「鏗」爾投瑟"],"ans":0,"exp":"(A)中「揠」讀ㄧㄚˋ，「偃」讀ㄧㄢˇ，兩者讀音不同。(B)皆讀ㄑㄧㄝˋ；(C)皆讀ㄍㄡˋ；(D)皆讀ㄎㄥ。故選 (A)。"},{"level":"國中","topic":"字音字形","q":"下列各組詞語，哪一個選項中「沒有」錯別字？","options":["針貶時弊／肆無忌憚","趨之若鶩／濫竽充數","名符其實／美輪美奐","破釜沈舟／委屈求全"],"ans":1,"exp":"(B)「趨之若鶩」與「濫竽充數」字形完全正確。(A)應為針「砭」；(C)應為名「副」其實；(D)應為委「曲」求全。故選 (B)。"},{"level":"國中","topic":"字音字形","q":"下列「」中的字，字形兩兩相同的是哪一組？","options":["「ㄔㄡˊ」躊躇不決／「ㄔㄡˊ」辦校慶","「ㄐㄧㄥˋ」自離去／「ㄐㄧㄥˋ」相走告","「ㄉㄨㄢˋ」鍊身體／鋼鐵「ㄉㄨㄢˋ」造","「ㄌㄧˋ」兵秣馬／再接再「ㄌㄧˋ」"],"ans":2,"exp":"(C)「鍛」鍊與「鍛」造之字形相同。(A)為躊/籌；(B)為逕/競；(D)為礪/厲，其餘各組字形皆不相同。故正確答案選擇2。"},{"level":"國中","topic":"字音字形","q":"下列各組「」中的字，哪一組讀音「相同」？","options":["「詛」咒／「咀」嚼","「塑」膠／「溯」溪","「哺」育／黃「埔」","「嗔」怪／「縝」密"],"ans":1,"exp":"(B)中「塑」與「溯」皆讀ㄙㄨˋ。(A)「詛」ㄗㄨˇ/「咀」ㄐㄩˇ；(C)「哺」ㄅㄨˇ/「埔」ㄆㄨˇ；(D)「嗔」ㄔㄣ/「縝」ㄓㄣˇ。故選 (B)。"},{"level":"國中","topic":"字音字形","q":"「他因涉嫌收受賄賂，被警方拘捕歸案。」句中「賄賂」與「拘捕」的讀音依序為何？","options":["ㄏㄨㄟˋ ㄌㄨˋ／ㄐㄩ ㄅㄨˇ","ㄏㄨㄟˋ ㄌㄨㄛˋ／ㄐㄩ ㄅㄨˇ","ㄏㄨㄟˋ ㄌㄨˋ／ㄐㄩ ㄅㄨ","ㄏㄨㄟˋ ㄌㄨㄛˋ／ㄐㄩˊ ㄅㄨˇ"],"ans":0,"exp":"「賄賂」讀音為ㄏㄨㄟˋ ㄌㄨˋ；「拘捕」讀音為ㄐㄩ ㄅㄨˇ。常有人將「賂」誤讀為ㄌㄨㄛˋ，或將「拘」誤讀為ㄐㄩˊ。故(A)完全正確。故選 (A)。"},{"level":"國中","topic":"詞語成語","q":"「張經理在公司一向專橫跋扈，這次決策失誤，終於導致全盤皆輸，真是□□□□。」空格中填入哪一個成語最恰當？","options":["咎由自取","功虧一簣","篳路藍縷","引咎辭職"],"ans":0,"exp":"「咎由自取」指遭受責罰是自己造成的，最契合主角「專橫」導致失誤的因果關係。(B)形容差最後一步；(C)形容創業艱難；(D)為行動，非形容。故選 (A)。"},{"level":"國中","topic":"詞語成語","q":"下列「」中的成語，哪一個運用「不恰當」？","options":["這對孿生兄弟長得「一模一樣」，連媽媽也常認錯。","這篇散文結構嚴謹，字字珠璣，真可謂「不刊之論」。","他的演講生動有趣，台下聽眾聽得「味同嚼蠟」。","他平日不肯努力，臨考前才「臨時抱佛腳」，效果有限。"],"ans":2,"exp":"「味同嚼蠟」形容枯燥無味，與「演講生動、聽眾專注」的語境完全相反，屬於詞語誤用。其他選項中一模一樣、不刊之論、臨時抱佛腳之運用皆正確。故選 (C)。"},{"level":"國中","topic":"詞語成語","q":"「李教授在學術界研究多年，其見解精闢獨到，常常能□□□□地指出問題的核心。」空格中填入哪一個成語最恰當？","options":["一針見血","拖泥帶水","隔靴搔癢","人云亦云"],"ans":0,"exp":"「一針見血」比喻說話或寫文章直截了當，切中要害，最符合「指出問題核心」的語意。(B)、(C)、(D)皆為反義或不合語境的詞彙。故選 (A)。"},{"level":"國中","topic":"詞語成語","q":"下列各組「」中成語的含意，哪一組是「反義詞」？","options":["「陽奉陰違」與「口是心非」","「字字珠璣」與「字字璣珠」","「落井下石」與「雪中送炭」","「理直氣壯」與「義正言辭」"],"ans":2,"exp":"「落井下石」比喻乘人危難時加以陷害；「雪中送炭」比喻在人急需時給予幫助，兩者互為反義詞。(A)與(D)為近義詞；(B)後者非正式成語。故選 (C)。"},{"level":"國中","topic":"詞語成語","q":"「這座新建的圖書館設計新穎、藏書豐富，每到假日，前來閱讀的民眾□□□□。」空格中不適合填入哪一個成語？","options":["絡繹不絕","川流不息","門可羅雀","熙熙攘攘"],"ans":2,"exp":"「門可羅雀」形容門庭冷落，沒有賓客來訪，與「前來閱讀的民眾極多」的熱鬧語境相反，不適合填入。其他選項皆能形容人潮多。故(C)正確。"},{"level":"國中","topic":"修辭","q":"「感時花濺淚，恨別鳥驚心。」這兩句詩主要運用了哪兩種修辭手法？","options":["對偶、擬人","誇張、設問","排比、比喻","引用、借代"],"ans":0,"exp":"「感時花濺淚，恨別鳥驚心」句式對稱，字數相等，為「對偶」；同時將人的情感投射到花、鳥身上（花會流淚、鳥會驚心），屬於「擬人」。故(A)正確。"},{"level":"國中","topic":"修辭","q":"「狂風咆哮著，像一頭憤怒的野獸在山谷中亂竄。」這句話同時運用了哪兩種修辭法？","options":["擬人、比喻","擬人、借代","誇張、設問","對偶、排比"],"ans":0,"exp":"「狂風咆哮」賦予風人類咆哮的動作，是「擬人」；「像一頭憤怒的野獸」使用「像」字將風比作野獸，是「比喻（明喻）」。因此這句話同時運用了擬人與比喻。故選 (A)。"},{"level":"國中","topic":"修辭","q":"下列哪一個句子「沒有」使用「設問」修辭？","options":["人生能有幾回搏？此時不搏更待何時？","這是誰的筆記本？原來是小華的。","難道你不知道今天有考試嗎？","我不知道他明天會不會來學校。"],"ans":3,"exp":"(D)只是單純陳述「我不知道」這件事，並無提問或反問語氣，不屬於設問修辭。(A)與(C)為反問，(B)為設問中的提問。故選 (D)。"},{"level":"國中","topic":"修辭","q":"「白日依山盡，黃河入海流。欲窮千里目，更上一層樓。」關於這首詩的修辭，下列敘述何者錯誤？","options":["「白日依山盡，黃河入海流」是對偶","「欲窮千里目」運用了誇張（誇飾）修辭","「更上一層樓」運用了借代修辭","全詩並未使用設問修辭"],"ans":2,"exp":"「更上一層樓」在此處是寫實、雙關與象徵，並非「借代」修辭。第一二句為對偶，欲窮千里目為誇飾修辭，全詩並未使用任何設問修辭。故(C)錯誤。"},{"level":"國中","topic":"修辭","q":"「微雨如絲，密密地斜織著。」這句話所使用的修辭法，與下列何者相同？","options":["春天像剛落地的娃娃，從頭到腳都是新的。","不知細葉誰裁出？二月春風似剪刀。","朱門酒肉臭，路有凍死骨。","明月松間照，清泉石上流。"],"ans":0,"exp":"原句「微雨如絲」為明喻。(A)「春天像娃娃」亦為明喻，兩者修辭相同，故選 (A)。(B)為設問兼比喻；(C)為對比與對偶；(D)為對偶。"},{"level":"國中","topic":"文法標點","q":"下列句子中，何者「沒有」語病？","options":["通過這次的安全講座，使同學們提高了自我保護的意識。","這家商店的商品物美價廉，深受廣大消費者所喜愛。","我們應適度規律運動，避免不暴飲暴食，以保持身體健康。","能否持之以恆地閱讀，是提高語文素養的重要關鍵。"],"ans":3,"exp":"(D)意思明確且無語病。(A)成分殘缺，缺少主詞；(B)「深受……所喜愛」結構雜糅；(C)雙重否定變成「要暴飲暴食」，不合常理。故選 (D)。"},{"level":"國中","topic":"文法標點","q":"下列關於複句邏輯的判斷，哪一個選項的關聯詞使用最為恰當？","options":["「雖然」你有多大的困難，「也」要堅持完成任務。","「不僅」這座橋結構堅固，「而且」造型也非常優美。","「既然」明天下雨，「就」我們取消這次的郊遊計畫。","「與其」在家裡看電視，「寧可」去圖書館看書。"],"ans":1,"exp":"(B)遞進複句之關聯詞與邏輯正確。(A)「雖然」應改為「不管」；(C)「就」應在主詞後；(D)與其應與「不如」搭配，而非寧可。故選 (B)。"},{"level":"國中","topic":"文法標點","q":"下列句子中，標點符號的使用何者最為正確？","options":["「你在看什麼書啊？」媽媽好奇地問：「可以借我看看嗎？」","論語、孟子、大學、中庸合稱為四書。","他去過北京、上海、廣州……等許多大城市。","這件事到底是誰做的？是你？還是他？"],"ans":3,"exp":"(D)為選擇問，連續發問時各問句後皆用問號，使用正確。(A)冒號應改為逗號；(B)四書名應加書名號；(C)省略號與等字重複。故選 (D)。"},{"level":"國中","topic":"文法標點","q":"「在學習的過程中，我們不僅要吸收新知，更要學會思考與質疑。」這句話屬於哪一種關係的複句？","options":["因果複句","假設複句","遞進複句","條件複句"],"ans":2,"exp":"「不僅……更……」是典型的遞進複句關聯詞，表示後者的語意比前者更進一層，因此該句屬於「遞進複句」。其他選項如因果、假設、條件皆與此句邏輯不符。故選 (C)。"},{"level":"國中","topic":"文言文","q":"下列「」中的文言虛字，哪一組的字義「相同」？","options":["「以」偏概全／徐噴「以」煙","無「之」境地／送孟浩然「之」廣陵","學而時習「之」／知「之」為知之","於事無「補」／不無小「補」"],"ans":2,"exp":"(C)中「學而時習之」與「知之為知之」的「之」皆為代詞，指代所學的知識。(A)以分別為介詞與連詞；(B)分別為助詞與動詞，故選 (C)。"},{"level":"國中","topic":"文言文","q":"閱讀以下文言文：\n「蜀之鄙有二僧，其一貧，其一富。貧者語於富者曰：『吾欲之南海，何如？』」\n文中「吾欲之南海」的「之」字，字義與下列何者相同？","options":["送孟浩然「之」廣陵","學而時習「之」","蓮「之」愛，同予者何人","物外「之」趣"],"ans":0,"exp":"原句「之」為動詞「往」。(A)「之廣陵」的「之」亦為動詞「往」，兩者用法相同，故選 (A)。(B)為代詞；(C)與(D)皆為助詞。"},{"level":"國中","topic":"文言文","q":"「忽有龐然大物，拔山倒樹而來，蓋一癩蝦蟆也。」（沈復《兒時記趣》）關於這句話的理解，下列敘述何者正確？","options":["這隻癩蝦蟆真的比山還要高大","「蓋」在句中是蓋子的意思","這句話使用了誇張（誇飾）的修辭手法","作者當時感到非常害怕而落荒而逃"],"ans":2,"exp":"此句是作者以「童心」將蝦蟆聯想為巨獸，把其動作形容為拔山倒樹，屬於誇飾修辭，(C)正確。蓋在此為「原來是」；作者當時神態怡然，並未害怕。故選 (C)。"},{"level":"國中","topic":"文言文","q":"「學而不思則罔，思而不學則殆。」這句話強調了學習時應該注意什麼？","options":["只要努力思考，不需要讀書","學習與思考必須並重，不可偏廢","讀書只要多，就能自然理解","學習時要多與他人討論"],"ans":1,"exp":"「學而不思則罔（迷惑），思而不學則殆（危殆）」。孔子這句話強調「學」與「思」相輔相成，必須並重，只學不思或只思不學都會帶來不良後果。故選 (B)。"},{"level":"國中","topic":"文言文","q":"「三人行，必有我師焉。擇其善者而從之，其不善者而改之。」這段話主要傳達的觀點是什麼？","options":["每個人都可以當別人的老師","要懂得觀察他人的優缺點，並以此作為自我勉勵與修正的借鏡","跟別人在一起時，一定要找一個老師學習","只要是別人的行為，我們都要全盤接受"],"ans":1,"exp":"孔子這段話說明「三人行必有我師」，核心在於學習他人的優點（擇其善者而從之），並以他人的缺點自我反省與改正（其不善者而改之），即自我修養的借鏡。故選 (B)。"},{"level":"國中","topic":"閱讀理解","q":"閱讀以下詩歌：「君自故鄉來，應知故鄉事。來日綺窗前，寒梅著花未？」（王維〈雜詩〉）關於這首詩的解讀，下列敘述何者最恰當？","options":["詩人急切地想知道故鄉梅花開了沒有，反映其對故鄉的深切思念","詩人非常嫌棄故鄉，所以只關心梅花而不關心親人","詩人與來人關係不好，所以故意問寒梅而不問其他大事","這首詩主要在描寫冬天的美麗景色"],"ans":0,"exp":"這首詩透過詢問「寒梅著花未」這件微小卻親切的事，細緻而深情地表達了詩人對故鄉的魂牽夢縈與深切思念。其他選項皆曲解了詩人「以梅代鄉」的真摯情感。故選 (A)。"},{"level":"國中","topic":"閱讀理解","q":"「生命是一張單程車票，沒有回程，也沒有下一班。我們所能做的，就是珍惜沿途的每一道風景，認真過好當下的每一天。」這段話的核心觀點是什麼？","options":["人生短暫，應該及時行樂、不計後果","生命無法重來，我們應該珍惜時間與當下","坐火車旅行時，要多注意窗外的風景","未來比當下更重要，要為以後做準備"],"ans":1,"exp":"文中將生命比作「單程車票」，並強調「珍惜沿途的每一道風景，認真過好當下的每一天」，這明確指向「生命無法重來，應珍惜當下與時間」的哲理，故(B)最契合。"},{"level":"國中","topic":"閱讀理解","q":"閱讀以下段落：「科學家發現，海豚在大海中游動時，會不斷發出高頻率的超音波。這些超音波碰到前方的障礙物或魚群後會反射回來，海豚就是藉此來判斷方向和尋找獵物的。」根據這段話，海豚辨識方向主要是利用什麼？","options":["靈敏的視覺","超音波的反射","海水溫度的變化","同伴之間的呼喚"],"ans":1,"exp":"文中明確指出「超音波碰到前方的障礙物或魚群後會反射回來，海豚就是藉此來判斷方向」，說明海豚是利用「超音波的反射」來辨識方向與尋獵，故(B)正確。"},{"level":"國中","topic":"閱讀理解","q":"「真正的幽默，不是去嘲笑他人的缺陷，而是能在自己的困境中找到樂趣，並用溫和的方式與世界和解。」根據這段話，下列何者符合「真正的幽默」？","options":["開同學外表缺陷的玩笑來博取大家一笑","在自己考試不及格時，自嘲並樂觀面對、找出努力方向","嘲笑別人的失敗，藉此顯得自己很聰明","用刻薄的言語去反駁別人的批評"],"ans":1,"exp":"文中定義「真正的幽默」是「在自己的困境中找到樂趣」，而非「嘲笑他人的缺陷」。(B)在自己面臨不及格的困境時能自嘲並樂觀面對，完全契合此定義。故選 (B)。"},{"level":"國中","topic":"閱讀理解","q":"「泰戈爾說：『靜靜地聽，我的心呀，聽那世界的低語，這是它向你求愛的信號。』」這句話主要在啟示我們什麼？","options":["世界很嘈雜，我們應該保持沉默","要用心去聆聽、感受大自然與生活的美好","世界在向人類求婚，我們要認真對待","只有在安靜的地方才能聽到聲音"],"ans":1,"exp":"泰戈爾這句富有詩意的名言，旨在啟示人們要用一顆「寧靜、敏銳的心」去聆聽、體會大自然與世界所展現的種種美好與愛意。(B)最能傳達這種生活美學。故選 (B)。"},{"level":"國中","topic":"閱讀理解","q":"閱讀以下短文：「讀一本好書，就是和許多高尚的人談話。我們能從書中汲取他們的智慧，豐富我們的心靈。」這段話的主要意旨與下列何者最接近？","options":["書中自有黃金屋，讀書能讓人富有","讀書能讓我們結交到許多社會地位高尚的朋友","閱讀優秀的作品，能讓我們提升思想與心靈境界","讀書時應該一邊讀一邊與身旁的人大聲討論"],"ans":2,"exp":"文中「讀好書是和高尚的人談話」及「汲取智慧，豐富心靈」，強調的是優秀作品能提升讀者的心靈境界與思想。第一個、第二個、(D)皆偏離了核心。故選 (C)。"},{"level":"高中","topic":"詞語成語","q":"下列各組引號中成語的辨析，哪一個選項的成語運用「最恰當」？","options":["他的文章條理分明、論證嚴密，真可謂「不刊之論」。","這部電影情節荒謬、破綻百出，簡直是「扣人心弦」。","他平日在班上作威作福，這次考試作弊被抓，真是「實至名歸」。","這場音樂會高手雲集，水準之高，令人「味同嚼蠟」。"],"ans":0,"exp":"「不刊之論」指不可磨滅、極有道理的言論，用來讚美文章論證嚴密極為恰當。(B)形容電影與荒謬矛盾；(C)為貶詞褒用；(D)與精采相反。故選 (A)。"},{"level":"高中","topic":"詞語成語","q":"下列「」中的詞語，哪一個字義兩兩「相同」？","options":["不「期」而遇／「期」年之後","「中」規中矩／「中」道崩殂","不「恥」下問／不「恥」最後","「適」得其反／無所「適」從"],"ans":2,"exp":"(C)「不恥下問」與「不恥最後」的「恥」皆為意動用法，以……為恥。(A)分別為約定、周年；(B)分別為符合、半途；(D)分別為剛好、往。故選 (C)。"},{"level":"高中","topic":"詞語成語","q":"「政府近年來積極推動各項基礎建設，期盼能收到□□□□之效，為經濟帶來長遠的繁榮。」空格中填入哪一個成語最恰當？","options":["一勞永逸","功敗垂成","釜底抽薪","寅吃卯糧"],"ans":0,"exp":"「一勞永逸」指辛苦一次，把事情辦好，以後就可以不再費力，最符合「為經濟帶來長遠繁榮」的長效政策語境。其他選項皆為負面成語或不切合長遠之意。故選 (A)。"},{"level":"高中","topic":"詞語成語","q":"下列各組「」中的詞語，哪一組「不屬於」同義詞？","options":["「篳路藍縷」與「創業維艱」","「薪火相傳」與「代代相傳」","「緣木求魚」與「水中撈月」","「落井下石」與「雪中送炭」"],"ans":3,"exp":"(D)中「落井下石」意為乘人危難時加以陷害，「雪中送炭」意為在人困急時給予幫助，兩者為「反義詞」，不屬於同義詞。第一、第二、(C)均為近義詞。故選 (D)。"},{"level":"高中","topic":"詞語成語","q":"「這兩位學者在該學術領域的成就皆極為傑出，彼此各有所長，可謂□□□□。」空格中最適宜填入哪一個成語？","options":["並駕齊驅","分道揚鑣","涇渭分明","大相徑庭"],"ans":0,"exp":"「並駕齊驅」比喻彼此力量、地位或才能不相上下，最契合「兩位學者成就皆傑出，各有所長」的語境。(B)指各奔前程；(C)指界限清楚；(D)指差別大。故選 (A)。"},{"level":"高中","topic":"修辭","q":"「潯陽江頭夜送客，楓葉荻花秋瑟瑟。」（白居易〈琵琶行〉）這兩句詩在營造環境氣氛上，主要運用了哪一種手法？","options":["以景襯情","虛實並茂","借古諷今","欲揚先抑"],"ans":0,"exp":"「楓葉荻花秋瑟瑟」透過描寫秋夜江邊楓葉凋零、荻花隨風瑟瑟作響的蕭瑟秋景，來烘托、襯托詩人與友人惜別時無限悲涼與感傷的心境，屬於「以景襯情」。故選 (A)。"},{"level":"高中","topic":"修辭","q":"「主人下馬客在船，舉酒欲飲無管弦。」（白居易〈琵琶行〉）這句話主要運用了哪一種文法或修辭手法？","options":["互文","誇張","倒裝","借代"],"ans":0,"exp":"「主人下馬客在船」是經典的「互文」修辭，意指「主人與客人一同下馬，一同上船」，而非主人單獨下馬、客人單獨在船。這種交錯互補的筆法即是互文。故選 (A)。"},{"level":"高中","topic":"修辭","q":"下列哪一個句子「沒有」使用「倒裝」修辭（或倒裝句型）？","options":["父母唯其疾之憂","徐噴以煙","求人不如求己","何陋之有？"],"ans":2,"exp":"(C)「求人不如求己」是正常的動賓結構與比較句型，並無倒裝。(A)為「憂其疾」之倒裝；(B)為「以煙徐噴」之倒裝；(D)為「有何陋」之倒裝。故選 (C)。"},{"level":"高中","topic":"修辭","q":"「青青子衿，悠悠我心。」（《詩經》）這兩句詩在修辭上主要使用了「借代」，請問「青青子衿」借代的是什麼？","options":["青綠色的衣服","思念的戀人或賢才","大自然的景色","高尚的品德"],"ans":1,"exp":"「青青子衿」原指周代學子的青色衣領，在此詩中，詩人以此借代「自己所思念、愛慕的戀人（或曹操在《短歌行》中引申借代為賢才）」，並非指衣服本身。故選 (B)。"},{"level":"高中","topic":"修辭","q":"下列詩句中，何者「沒有」運用「擬人」修辭？","options":["唯有暗香凌競爽，五更風雨不曾知","蠟燭有心還惜別，替人垂淚到天明","相看兩不厭，只有敬亭山","江流石不轉，遺恨失吞吳"],"ans":3,"exp":"(D)「江流石不轉，遺恨失吞吳」運用的是擬物與借代、對比，並無擬人。(A)「暗香凌競爽」、(B)「蠟燭有心」、(C)「相看兩不厭」均為擬人。故選 (D)。"},{"level":"高中","topic":"文言文","q":"閱讀以下文句：「夫人之相與，俯仰一世。或取諸懷抱，悟言一室之內；或因寄所託，放浪形骸之外。」（王羲之〈蘭亭集序〉）關於這段文字的理解，下列敘述何者正確？","options":["王羲之認為人與人交往，時間過得極慢，令人難以忍受","「悟言」在句中是指「領悟對方的言語」","「放浪形骸之外」是指不受禮法拘束，放任自適","文中「或……或……」表示前後文意是相互排斥且無法並存的"],"ans":2,"exp":"「放浪形骸之外」指超脫世俗禮法，放任自適，(C)正確。(A)「俯仰一世」指時間短暫；(B)「悟言」指面對面談話；(D)或表示並列。故選 (C)。"},{"level":"高中","topic":"文言文","q":"閱讀以下段落：「古之學者必有師。師者，所以傳道、受業、解惑也。」（韓愈〈師說〉）關於韓愈此言，下列敘述何者正確？","options":["「所以」在句中是表示因果關係的關聯詞","韓愈認為老師的首要任務是傳授為人處世的根本道理（道）","韓愈認為只有古代的學者才需要拜師學習","「受業」的「受」通「授」，意為接受老師的學業"],"ans":1,"exp":"韓愈將「傳道」置於首位，說明傳授道理是老師最重要的任務，(B)正確。(A)「所以」是「用來……的」之介詞結構；(D)「受業」為傳授學業。故選 (B)。"},{"level":"高中","topic":"文言文","q":"「臣亮言：先帝創業未半，而中道崩殂；今天下三分，益州疲弊，此誠危急存亡之秋也。」（諸葛亮〈出師表〉）關於這段文字的解讀，下列何者正確？","options":["「崩殂」在句中是指國家政權倒塌瓦解","「此誠危急存亡之秋也」的「秋」是指秋天這個季節","「益州疲弊」反映出蜀漢當時面臨人力、物力匱乏的困境","諸葛亮寫此表的目的，是為了向後主劉禪告老還鄉"],"ans":2,"exp":"「益州疲弊」反映蜀漢當時物力、人力困乏的窘境，(C)正確。(A)「崩殂」指皇帝去世；(B)「秋」指關鍵時刻；(D)此表是為了北伐。故選 (C)。"},{"level":"高中","topic":"文言文","q":"「醉翁之意不在酒，在乎山水之間也。山水之樂，得之心而寓之酒也。」（歐陽脩〈醉翁亭記〉）關於這段名言的意境，下列敘述何者最為恰當？","options":["作者因為在官場失意，所以藉酒澆愁、麻醉自我","作者喝酒只是為了應酬，並非真心喜歡喝酒","作者真正的樂趣在於欣賞大自然山水，並將這種樂趣寄託於飲酒之中","作者認為酒太難喝，不如山泉水美味"],"ans":2,"exp":"「醉翁之意不在酒，在乎山水之間」說明作者喝酒是表象，核心樂趣在於寄情山水、回歸自然。這反映出作者豁達隨緣、與民同樂的高雅情懷，而非單純藉酒消愁。故選 (C)。"},{"level":"高中","topic":"文言文","q":"「世有伯樂，然後有千里馬。千里馬常有，而伯樂不常有。」（韓愈〈馬說〉）這段文字主要在諷喻什麼現象？","options":["世人都不懂得如何飼養千里馬","統治者往往缺乏識人、用人的眼光，導致人才被埋沒","古代的馬匹品質太差，很難挑選出優秀的馬","伯樂的識馬技術已經失傳，非常可惜"],"ans":1,"exp":"韓愈以「千里馬」比喻傑出人才，「伯樂」比喻能識拔人才的統治者。這段話主要在諷刺統治者昏庸、不識英才，導致許多優秀人才遭到埋沒與摧殘。故選 (B)。"},{"level":"高中","topic":"文言文","q":"「庭有枇杷樹，吾妻死之年所手植也，今已亭亭如蓋矣。」（歸有光〈項脊軒志〉）這段文字最能展現作者何種情感？","options":["對枇杷樹生長茁壯的喜悅","對亡妻綿長而深沉的思念與哀悼","對庭院環境破舊的無奈與感傷","對自己多年寒窗苦讀的自豪"],"ans":1,"exp":"這段文字看似平淡地寫樹，實則睹物思人。枇杷樹是妻子死之年親手種植，如今「亭亭如蓋」，暗示時間流逝，而作者對亡妻的哀思與眷戀亦隨樹般深沉茂密。故選 (B)。"},{"level":"高中","topic":"文言文","q":"「釃酒臨江，橫槊賦詩，固一世之雄也，而今安在哉？」（蘇軾〈赤壁賦〉）關於這段文句的解析，下列何者正確？","options":["這句話是蘇軾在讚美曹操的英雄氣概並為其感到自豪","「橫槊賦詩」中的「槊」是一種用來寫詩的特製毛筆","「而今安在哉」表達了蘇軾對英雄人物終歸黃土、生命短暫的歷史滄桑感","這句話的句式完全是平鋪直敘，沒有使用任何修辭"],"ans":2,"exp":"「and今安在哉」指如今這些英雄又在哪裡呢？蘇軾藉此表達對英雄消逝、生命短暫的歷史滄桑感，(C)正確。(A)並非自豪；(B)「槊」是長矛。故選 (C)。"},{"level":"高中","topic":"文學常識","q":"關於古典散文作家的敘述，下列何者完全正確？","options":["蘇軾，字子瞻，號東坡居士，與父蘇洵、弟蘇轍合稱「三蘇」，皆名列「唐宋八大家」。","韓愈，字退之，自署昌黎郡望，世稱韓昌黎，他是「宋代」古文運動的領袖。","歐陽脩，號醉翁、六一居士，他是「唐代」倡導詩文革新運動的先驅。","歸有光，字熙甫，號震川，他是明代「茶陵派」的代表作家。"],"ans":0,"exp":"(A)對蘇軾及三蘇的敘述完全正確。(B)韓愈是「唐代」古文運動領袖，而非宋代；(C)歐陽脩是「宋代」而非唐代；(D)歸有光為唐宋派。故選 (A)。"},{"level":"高中","topic":"文學常識","q":"古典文學中常有「作者與作品」的配對。下列哪一組配對「完全正確」？","options":["陶淵明／〈五柳先生傳〉","班固／〈史記〉","蒲松齡／〈儒林外史〉","曹雪芹／〈西遊記〉"],"ans":0,"exp":"(A)「陶淵明／〈五柳先生傳〉」配對完全正確。(B)〈史記〉作者為司馬遷；(C)〈儒林外史〉為吳敬梓；(D)〈西遊記〉為吳承恩。故選 (A)。"},{"level":"高中","topic":"文學常識","q":"下列關於中國重要文學體裁的敘述，何者正確？","options":["《詩經》是中國最早的詩歌總集，收集了春秋中葉至戰國時期的作品，以四言為主。","「詞」又稱「詩餘」、「長短句」，興起於唐代，盛行於宋代，其字數與句式均有固定格式。","「散曲」是元代新興的文學體裁，分為小令和套數，與詞一樣必須加上襯字。","「駢文」盛行於六朝，講究對仗、排偶，但不注重聲律 and 用典。"],"ans":1,"exp":"(B)關於「詞」的敘述完全正確。(A)《詩經》收集的是西周初年至春秋中葉的作品（非戰國）；(C)詞不能加襯字；(D)駢文極為注重聲律。故選 (B)。"},{"level":"高中","topic":"文學常識","q":"現代著名作家的散文風格各具特色。下列關於作家與其代表作品或風格的敘述，何者「錯誤」？","options":["琦君的散文多以懷舊、憶往為主，筆調溫柔敦厚，代表作有〈髻〉、〈與橡皮擦決鬥〉等。","徐志摩是新月派代表詩人，其詩風唯美飄逸，散文亦富麗濃郁，代表作有〈再別康橋〉。","張愛玲的散文與小說皆善於描寫都市人性，代表作有〈愛〉、〈天才夢〉等。","簡媜的散文風格多變，文字瑰麗奇特，代表作有〈水問〉、〈紅嬰仔〉等。"],"ans":0,"exp":"(A)中，〈與橡皮擦決鬥〉是張曉風的散文作品，並非琦君的作品。琦君的散文代表作多為《紅紗燈》、《三更有夢書當枕》等，故此選項敘述錯誤，答案為 (A)。"},{"level":"高中","topic":"文學常識","q":"下列哪一組古典詩歌流派與代表作家的配對，完全正確？","options":["山水田園詩派：王維、孟浩然","邊塞詩派：李白、杜甫","浪漫詩派：高適、岑參","社會寫實詩派：王之渙、王昌齡"],"ans":0,"exp":"(A)中王維與孟浩然為唐代「山水田園詩派」的代表作家，配對正確。(B)為浪漫與寫實宗師；(C)高、岑為邊塞派；(D)王、王多邊塞詩。故選 (A)。"},{"level":"高中","topic":"文學常識","q":"關於著名古籍的敘述，下列哪一個選項「錯誤」？","options":["《左傳》又稱《春秋左氏傳》，是一部編年體的史書，善於敘事及描寫戰爭。","《戰國策》是一部國別體的歷史匯編，主要記載戰國時期謀臣策士的言論與謀略。","《莊子》又稱《南華真經》，其文章汪洋恣肆，想像豐富，常用寓言來說理。","《論語》是孔子親自撰寫的哲學著作，系統性地記錄了其核心思想「仁」與「禮」。"],"ans":3,"exp":"(D)錯誤。《論語》並非孔子親自撰寫，而是由孔子的弟子及再傳弟子記錄、整理孔子及其弟子的言言匯編而成。(A)、(B)與(C)均正確。故選 (D)。"},{"level":"高中","topic":"文學常識","q":"古典小說常以特定的結構或題材聞名。下列關於中國古典小說的敘述，何者正確？","options":["《三國演義》是中國最早的長篇章回小說，屬於「神魔小說」的代表作。","《水滸傳》描寫北宋末年梁山泊好漢起義的故事，是中國著名「歷史演義小說」。","《西遊記》是著名的章回體神魔小說，情節奇幻，富含社會諷刺與哲理。","《紅樓夢》原名《石頭記》，是一部描寫宋代貴族家庭興衰的優秀寫實小說。"],"ans":2,"exp":"(C)關於《西遊記》為神魔小說且富含哲理的敘述完全正確。(A)為歷史演義小說；(B)為俠義小說；(D)描寫的是清代貴族而非宋代。故選 (C)。"},{"level":"高中","topic":"閱讀理解","q":"閱讀以下文句：「子曰：『君子不以言舉人，不以人廢言。』」（《論語·衛靈公》）這句話的主要意旨是什麼？","options":["君子選拔人才時，只看他會不會說話；評斷言語時，只看說話者是誰","君子不單憑言語就推舉人才，也不因為某人的品行有缺陷就否定其正確的言論","君子不隨便對別人指手畫腳，也不隨便聽信別人的謠言","說話技巧高明的人一定是君子，品德差的人說的話一定不能聽"],"ans":1,"exp":"「不以言舉人」指不單憑言論好聽就推舉他；「不以人廢言」指不因說話者品德或地位低微就否定其正確言論。這體現了理性、公正的評判態度。故(B)正確。"},{"level":"高中","topic":"閱讀理解","q":"閱讀以下詩歌：「空山新雨後，天氣晚來秋。明月松間照，清泉石上流。竹喧歸浣女，蓮動下漁舟。隨意春芳歇，王孫自可留。」（王維〈山居秋暝〉）關於這首詩，下列推論何者「不正確」？","options":["這首詩描寫了秋天傍晚雨後山中的幽靜與清麗景色","「竹喧歸浣女，蓮動下漁舟」透過聲音與動態反襯山中的寧靜","「王孫自可留」中的「王孫」是詩人自稱，表達其隱居山林、遠離俗世的志趣","全詩主旨在於表達詩人對官場生活的嚮往與渴望建功立業的雄心"],"ans":3,"exp":"(D)錯誤。這首詩主要表現詩人寄情山水、嚮往隱居的生活，以及對官場庸俗生活的厭惡與遠離，並非對官場的嚮往。(A)、(B)與(C)皆正確。故選 (D)。"},{"level":"高中","topic":"閱讀理解","q":"閱讀以下文段：「美，是需要時間沉澱的。當我們在忙碌的生活中，能駐足欣賞一朵花的綻放、聆聽一陣風的呢喃，那一刻，心靈便得到了洗滌。現代人往往走得太快，以至於靈魂都跟不上了。」這段話主要在批判現代人的何種生活狀態？","options":["缺乏物質生活，導致精神世界空虛","過度追求速度與效率，忽略了生命深處的美感與心靈安寧","不喜歡到戶外活動，缺乏與大自然的接觸","學習速度不夠快，無法適應瞬息萬變的時代"],"ans":1,"exp":"文中指出「美需要時間沉澱」，批判現代人「走得太快，靈魂跟不上」，意指在高速運轉、追求效率的忙碌生活中，人們遺失了品味美感與心靈安寧的能力。故選 (B)最契合。"},{"level":"高中","topic":"閱讀理解","q":"閱讀以下段落：「在生物界中，物競天擇是殘酷的定律。然而，科學家也發現，同種或不同種生物之間的合作（共生）現象同樣普遍。這說明生存之道不只有競爭，互利共生也是演化上的重要關鍵。」根據這段文字，下列推論何者最恰當？","options":["演化過程中，競爭是唯一的生存法則","只有強大的物種才能生存，弱小的物種必須合作","生物之間的合作共生，與物競天擇一樣，都是推動演化與生存的重要機制","共生現象只存在於同種生物之間，不同物種只會競爭"],"ans":2,"exp":"文中強調「生存之道不只有競爭，互利共生也是演化上的重要關鍵」，說明合作共生同樣是演化的核心機制。(A)與文意相反；第二、(D)皆與原文相悖。故選 (C)。"},{"level":"高中","topic":"閱讀理解","q":"「歸有光〈項脊軒志〉：『蜀清守丹穴，利甲天下，其後秦皇帝築女懷清台。劉玄德與曹操爭天下，諸葛孔明起隴中。方二人之昧昧於一隅也，世何嘗知有之？』』」歸有光在此處引用巴蜀寡婦清和諸葛亮的典故，其主要寄託了何種情懷？","options":["對古代富商及軍事天才的無限崇拜與羨慕","感傷自己如同未被發掘的英才，自我期許在寂寞中堅守、蓄積力量以待時機","批判秦始皇和曹操等統治者殘暴不仁、勞民傷財","說明巴蜀之地地靈人傑，是歷史上創業興家的風水寶地"],"ans":1,"exp":"歸有光藉巴蜀寡婦清及諸葛亮在昧昧無聞時世人不知的史實，寄託自己雖處簡陋書齋、科考失意，但仍堅守志向以待來日的期許，(B)正確。其他選項不符本意。故選 (B)。"},{"level":"高中","topic":"閱讀理解","q":"「張愛玲說：『生命是一襲華美的袍，爬滿了蝨子。』」這句名言主要在表達對生命的何種體悟？","options":["生命非常短暫，應該及時行樂","生命雖然表面看似美好、繁華，實則內部充滿了瑣碎、痛苦與不堪的掙扎","生命應該注重外在的裝扮，不要在意細微的缺點","生活在世上，每個人都會面臨嚴重的環境衛生問題"],"ans":1,"exp":"「華美的袍」象徵生命的表面美好；「爬滿了蝨子」象徵內部瑣碎、痛苦與不堪的掙扎。這句話揭示了生命美與醜、華麗與堪憂並存的矛盾本質，故(B)最貼切。"}];
+var WRITE=[{"id":"shenti","name":"審題四問","for":"所有文體","steps":["這題在問「什麼」？把題目的核心名詞圈出來（例如「季節的感覺」核心是感覺，不是季節）。","它限制了什麼？人稱、時間、地點、文體、字數，任何一個踩線就扣分。","它想看到什麼能力？記敘題看觀察與細節，論說題看邏輯與例證，情意題看轉化與體悟。","我有什麼可以寫？先列三個素材，挑最不俗、自己最有感的那一個。"],"trap":"最常見的失分不是文筆差，是離題。寫之前花 5 分鐘審題，勝過事後改 500 字。"},{"id":"bank","name":"素材銀行","for":"考前準備","steps":["準備 6 個「萬用素材」：家人、老師/同學、失敗經驗、一個地方、一本書或一部作品、一則新聞。","每個素材先寫成 150 字的完整片段，含一個具體畫面與一句體悟。","考場上不是現想，是「調度」：把手上的素材，接到題目的核心概念上。","同一素材可以往不同方向轉——祖母的手，可以寫親情、寫時間、寫勞動、寫城鄉。"],"trap":"素材要「具體到有畫面」。寫「阿嬤很辛苦」沒有分，寫「她剝蒜的指甲縫裡總是黑的」才有。"},{"id":"three","name":"論證三箭","for":"論說文／學測知性題","steps":["第一箭・主張：一句話講完你的立場，放在段落開頭，不要繞。","第二箭・理由：為什麼這個主張成立？講的是因果或原則，不是舉例。","第三箭・證據：數據、事件、文本、經驗，擇一即可，但必須「回扣主張」。","收尾一句：讓步或反駁——「有人認為……，但……」，層次立刻拉高。"],"trap":"多數人只有主張和例子，缺中間的「理由」，讀起來像流水帳堆例子。"},{"id":"sense","name":"五感描寫","for":"記敘文／抒情文","steps":["視覺之外，刻意補上聽覺、嗅覺、觸覺、味覺至少兩種。","把抽象情緒換成身體反應：不寫「我很緊張」，寫「手心的汗把准考證號碼糊掉了」。","動詞優先於形容詞：「陽光很刺眼」→「陽光在鐵皮屋頂上跳」。","一個場景只挑 2～3 個細節放大，全寫等於全沒寫。"],"trap":"五感不是拿來湊字數，是拿來取代空洞的形容詞。"},{"id":"small","name":"以小見大","for":"情意題／散文","steps":["先選一個「物」：一張票根、一把傘、一碗麵、一道傷疤。","用前半段寫這個物的具體樣子與一段和它有關的事。","後半段讓它「長大」：它指向的是時間、親情、失去、成長。","結尾回到那個物，但意義已經不同了——這是文章有沒有「昇華」的關鍵。"],"trap":"不要在開頭就把道理講完。道理提早出場，後面的描寫就全變成廢話。"},{"id":"struct","name":"起承轉合的變體","for":"所有文體","steps":["標準式：起（情境）→承（發展）→轉（意外或反思）→合（體悟）。","倒敘式：先給結果或最強畫面，再回頭交代，適合開頭要抓人的時候。","對照式：把兩個時空／兩個人並排寫，讓落差自己說話。","「轉」是全篇的分水嶺，沒有轉的文章只是紀錄，不是作品。"],"trap":"字數分配建議 2:3:3:2，最忌前面鋪陳太久，結尾三行草草收掉。"},{"id":"open","name":"開頭六法","for":"所有文體","steps":["畫面開頭：直接把讀者丟進一個場景。","懸念開頭：先講一句反常的話，再解釋。","引用開頭：引詩句或名言，但必須立刻扣題，不能只是裝飾。","設問開頭：問一個你等一下真的會回答的問題。","對比開頭：以前如何、現在如何。","下定義開頭：對題目關鍵詞給出你自己的定義（知性題很好用）。"],"trap":"禁用「在這個科技日新月異的時代」「人生就像一場旅行」，閱卷老師一天看八百次。"},{"id":"close","name":"結尾五法","for":"所有文體","steps":["回扣式：呼應開頭的那個畫面或物，但加上新的理解。","餘韻式：以一個動作或畫面收束，不把話講死。","昇華式：從個人經驗抬升到普遍處境，一句就好，不要說教。","行動式：說明自己接下來要怎麼做（適合知性題）。","反問式：把問題交還給讀者，但前提是你已經表態過。"],"trap":"不要用「總而言之」「由此可知」開頭，也不要在結尾才冒出新論點。"}];
+var RHET=[["譬喻","以彼喻此，有喻體、喻詞、喻依","他的心像一塊冰。"],["轉化（擬人）","把物寫成人，或把人寫成物","風姑娘輕輕吹著哨子。"],["映襯","把相反的事物並列，凸顯差異","朱門酒肉臭，路有凍死骨。"],["排比","三個以上結構相似的句子並列","看山是山，看水是水，看雲是雲。"],["類疊","同一字詞句反覆出現","尋尋覓覓，冷冷清清，淒淒慘慘戚戚。"],["設問","自問自答或提問引起注意","問君能有幾多愁？恰似一江春水向東流。"],["誇飾","刻意誇大或縮小","白髮三千丈，緣愁似個長。"],["借代","不直接說本名，改用相關事物代替","布衣（代平民）、汗青（代史冊）。"],["對偶","字數相等、詞性相對的兩句","兩個黃鸝鳴翠柳，一行白鷺上青天。"],["層遞","依大小、輕重、先後排列","修身、齊家、治國、平天下。"],["頂真","前句結尾作為後句開頭","歸來見天子，天子坐明堂。"],["雙關","一語同時關涉兩義","東邊日出西邊雨，道是無晴卻有晴。"],["引用","引詩文、名言、典故","子曰：「學而時習之。」"],["示現","把不在眼前的事寫得如在眼前","彷彿又看見她站在門口揮手。"],["倒裝","顛倒正常語序以強調","甚矣，汝之不惠！"]];
+var XUZI=[["之","的／他、它／往、到／取消句子獨立性","水陸草木之花（的）；輟耕之壟上（往）"],["其","他的、那個／難道、大概（語氣）","其妻獻疑（他的）；其真無馬邪（難道）"],["而","並且／但是／就／地（修飾）","溫故而知新（並且）；學而不思則罔（卻）"],["以","用、拿／因為／來（表目的）／認為","以刀劈狼（用）；不以物喜（因為）"],["於","在／向、對／比／被","戰於長勺（在）；苛政猛於虎（比）"],["者","……的人／……的東西／表停頓","仁者不憂；北山愚公者，年且九十"],["也","表判斷／表肯定語氣","陳勝者，陽城人也。"],["乃","才／竟然／就是","乃悟前狼假寐（才）；乃不知有漢（竟然）"],["為","是／做／被／替","此為何物（是）；為人所笑（被）"],["則","就／卻／那麼","學而不思則罔（就）"],["然","……的樣子／但是／這樣","屋舍儼然（樣子）；然吾嘗聞（但是）"],["焉","在那裡／語尾助詞／哪裡","心不在焉；且焉置土石（哪裡）"],["乎","嗎、呢（疑問）／啊（感嘆）／於","王侯將相寧有種乎？"],["若","如果／像／你","若有作奸犯科者（如果）；若為傭耕（你）"],["雖","雖然／即使","雖乘奔御風不以疾也（即使）"],["蓋","大概／因為／原來是","蓋餘之勤且艱若此（大概）"]];
+var LIUSHU=[["象形","畫出物體外形","日、月、山、水、馬"],["指事","用抽象符號標出意義","上、下、本、末、刃"],["會意","合兩字之義成新義","武、信、明、休、林"],["形聲","一半表義、一半表音（漢字最大宗）","江、河、期、想、材"],["轉注","同部同義、可互相解釋","考、老"],["假借","本無其字，借同音字表達","令、長、其（本為畚箕）"]];
+var PUNC=[["句號 。","一句話結束","他走了。"],["逗號 ，","句中停頓","下雨了，我沒帶傘。"],["頓號 、","並列的詞之間","梅、蘭、竹、菊。"],["分號 ；","並列的兩個子句之間","山高，水長；路遠，情深。"],["冒號 ：","提示下文","他只說了一句：我回來了。"],["引號 「」","引語、特稱、強調","他說：「別怕。」"],["破折號 ──","解釋、語氣轉折或延長","那個人──我永遠記得他──救了我。"],["刪節號 ……","語意未盡或省略","我想說……算了。"],["問號 ？","疑問句結尾","你到底要不要去？"],["驚嘆號 ！","感嘆、命令、驚訝","太好了！"]];
+
+
+(function(){
+  var S={
+    get:function(k,d){try{var v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
+    set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  };
+  var $=function(s){return document.querySelector(s);};
+  var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+  var done=S.get('zh.done',{});
+  var TOTAL=GRADES.length*8;
+
+  /* ---------- 角色切換 ---------- */
+  var role=S.get('zh.role','student');
+  function setRole(r){
+    role=r; S.set('zh.role',r); document.body.dataset.role=r;
+    $('#rT').classList.toggle('on',r==='teacher');
+    $('#rS').classList.toggle('on',r==='student');
+    $('#rHint').textContent = r==='teacher'
+      ? '教師版：顯示教學流程建議、三層提問設計與作業評量。'
+      : '學生版：顯示每單元的學習任務與進度勾選。';
+  }
+  $('#rT').onclick=function(){setRole('teacher');};
+  $('#rS').onclick=function(){setRole('student');};
+
+  /* ---------- 課程地圖 ---------- */
+  function gradePct(gi){
+    var n=0; for(var u=0;u<8;u++){ if(done[gi+'|'+u]) n++; }
+    return Math.round(n/8*100);
+  }
+  function renderMap(){
+    var stages=[],seen={};
+    GRADES.forEach(function(g,i){
+      if(!seen[g.stage]){seen[g.stage]=[];stages.push(g.stage);}
+      seen[g.stage].push(i);
+    });
+    var h='';
+    stages.forEach(function(st){
+      h+='<div class="stage"><h3>'+esc(st)+'</h3>';
+      h+='<p class="muted" style="margin:2px 0 0">'+esc(GRADES[seen[st][0]].goal)+'</p>';
+      h+='<div class="years">';
+      seen[st].forEach(function(i){
+        var p=gradePct(i);
+        h+='<button class="ychip'+(p===100?' done':'')+'" data-g="'+i+'">'+esc(GRADES[i].grade)
+          +'<span class="pct">'+p+'%</span></button>';
+      });
+      h+='</div></div>';
+    });
+    $('#mapBox').innerHTML=h;
+    Array.prototype.forEach.call(document.querySelectorAll('.ychip'),function(b){
+      b.onclick=function(){ pickGrade(+b.dataset.g); location.hash='#grade'; };
+    });
+  }
+
+  /* ---------- 年級課程 ---------- */
+  var cur=S.get('zh.grade',0);
+  function renderPick(){
+    var h='';
+    GRADES.forEach(function(g,i){
+      h+='<button data-g="'+i+'"'+(i===cur?' class="on"':'')+'>'+esc(g.grade.replace('年級',''))+'</button>';
+    });
+    $('#gPick').innerHTML=h;
+    Array.prototype.forEach.call($('#gPick').children,function(b){
+      b.onclick=function(){ pickGrade(+b.dataset.g); };
+    });
+  }
+  function pickGrade(i){ cur=i; S.set('zh.grade',i); renderPick(); renderGrade(); }
+
+  function teacherBlock(u,g){
+    return '<div class="t-only">'
+      +'<div class="kv"><b>教學流程建議（100 分鐘）</b><ul>'
+      +'<li><b style="display:inline;color:inherit">導入 10 分</b>：從學生的生活經驗切入「'+esc(u.focus)+'」，拋出一個懸念或爭議，先不給答案。</li>'
+      +'<li><b style="display:inline;color:inherit">文本細讀 40 分</b>：帶讀 '+esc(u.texts.join('、'))+'，標記關鍵句、生難字詞與寫作手法。</li>'
+      +'<li><b style="display:inline;color:inherit">討論提問 20 分</b>：依下方三層提問逐級推進，先個人思考再小組交換。</li>'
+      +'<li><b style="display:inline;color:inherit">寫作實作 20 分</b>：'+esc(u.writing)+'</li>'
+      +'<li><b style="display:inline;color:inherit">統整評量 10 分</b>：抽 2～3 份當場講評，回扣本單元重點。</li>'
+      +'</ul></div>'
+      +'<div class="kv"><b>三層提問設計</b><ul>'
+      +'<li><b style="display:inline;color:inherit">事實層</b>：文本中哪些句子直接呈現了「'+esc(u.focus)+'」？請指出出處。</li>'
+      +'<li><b style="display:inline;color:inherit">推論層</b>：作者為什麼用這種寫法處理它？換一種寫法會失去什麼？</li>'
+      +'<li><b style="display:inline;color:inherit">評鑑層</b>：你同意作者的看法或情感處理嗎？結合自身經驗說明理由。</li>'
+      +'</ul></div>'
+      +'<div class="kv"><b>作業</b><p style="margin:0">'+esc(u.writing)+'</p></div>'
+      +'<div class="kv"><b>評量方式</b><ul>'+g.assessment.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul></div>'
+      +'</div>';
+  }
+  function studentBlock(u,gi,ui){
+    var k=gi+'|'+ui, on=!!done[k];
+    return '<div class="s-only">'
+      +'<div class="kv"><b>學習任務</b><ul>'
+      +'<li>讀完 '+esc(u.texts.join('、'))+'，把看不懂的字詞先查清楚。</li>'
+      +'<li>用一句話回答：這幾篇在講「'+esc(u.focus)+'」的哪一面？</li>'
+      +'<li>寫作練習：'+esc(u.writing)+'</li>'
+      +'<li>寫完隔一天再讀一次自己的文章，至少改三個地方。</li>'
+      +'</ul></div>'
+      +'<label class="chk"><input type="checkbox" data-k="'+k+'"'+(on?' checked':'')+'>這個單元我完成了</label>'
+      +'</div>';
+  }
+  function renderGrade(){
+    var g=GRADES[cur], gi=cur;
+    var h='<div class="card"><span class="pill red">'+esc(g.stage)+'</span><span class="pill">年度目標</span>'
+      +'<h3 style="margin-top:8px;font-size:18px">'+esc(g.grade)+'</h3>'
+      +'<p class="sub" style="margin:6px 0 0">'+esc(g.goal)+'</p>'
+      +'<div class="bar"><i id="gBar"></i></div>'
+      +'<p class="muted" style="margin:6px 0 0" id="gPct"></p>'
+      +'<div class="kv" style="margin-top:14px"><b>核心能力</b><ul>'
+      +g.abilities.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')
+      +'</ul></div>'
+      +'<div class="kv"><b>語文重點</b><div class="txts">'
+      +g.keySkills.map(function(s){return '<span>'+esc(s)+'</span>';}).join('')
+      +'</div></div></div>';
+
+    h+='<h3 style="margin:20px 0 10px;font-size:16px">教學單元（8）</h3>';
+    g.units.forEach(function(u,ui){
+      h+='<details class="unit"><summary><span class="un">'+(ui+1)+'</span><span class="ut">'
+        +'<b>'+esc(u.title)+'</b><span>'+esc(u.focus)+'</span></span></summary>'
+        +'<div class="body">'
+        +'<div class="kv"><b>選文／文本</b><div class="txts">'
+        + u.texts.map(function(t){return '<span>'+esc(t)+'</span>';}).join('')
+        +'</div></div>'
+        +'<div class="kv"><b>寫作訓練</b><p style="margin:0">'+esc(u.writing)+'</p></div>'
+        + teacherBlock(u,g) + studentBlock(u,gi,ui)
+        +'</div></details>';
+    });
+    $('#gBox').innerHTML=h;
+
+    Array.prototype.forEach.call($('#gBox').querySelectorAll('.chk input'),function(c){
+      c.onchange=function(){
+        if(c.checked) done[c.dataset.k]=1; else delete done[c.dataset.k];
+        S.set('zh.done',done); bar(); renderMap(); backupMsg();
+      };
+    });
+    bar();
+  }
+  function bar(){
+    var p=gradePct(cur);
+    var b=$('#gBar'), t=$('#gPct');
+    if(b){b.style.width=p+'%';}
+    if(t){var n=0;for(var u=0;u<8;u++){if(done[cur+'|'+u])n++;} t.textContent='本年級進度 '+n+' / 8 單元（'+p+'%）';}
+  }
+
+  /* ---------- 特色課程 ---------- */
+  function renderSig(){
+    var h='';
+    SIG.forEach(function(c,i){
+      h+='<div class="sc"><div class="top">'
+        +'<span class="pill'+(c.category==='寫作'?' red':(c.category==='閱讀'?' jade':''))+'">'+esc(c.category)+'</span>'
+        +'<span class="pill jade">4 小時</span>'
+        +'<h3>'+esc(c.title)+'</h3>'
+        +'<p class="tl">'+esc(c.tagline)+'</p>'
+        +'<p class="meta">適合：'+esc(c.target)+'　｜　產出：'+esc(c.output)+'</p>'
+        +'</div><div class="act">'
+        +'<button class="btn" data-s="'+i+'">完整教案</button>'
+        +'</div></div>';
+    });
+    $('#sigBox').innerHTML=h;
+    Array.prototype.forEach.call($('#sigBox').querySelectorAll('[data-s]'),function(b){
+      b.onclick=function(){ openSig(+b.dataset.s); };
+    });
+  }
+  function openSig(i){
+    var c=SIG[i];
+    var h='<div class="x"><div><span class="pill red">'+esc(c.category)+'</span><span class="pill jade">4 小時單堂</span>'
+      +'<h3 style="margin-top:8px">'+esc(c.title)+'</h3></div>'
+      +'<button class="xbtn no-print" id="dX">✕</button></div>'
+      +'<p class="sub">'+esc(c.tagline)+'</p>'
+      +'<p class="muted">適合對象：'+esc(c.target)+'</p>'
+      +'<div class="kv"><b>學習目標</b><ul>'+c.objectives.map(function(o){return '<li>'+esc(o)+'</li>';}).join('')+'</ul></div>'
+      +'<div class="kv"><b>四小時流程</b><div class="tw"><table><thead><tr><th>時間</th><th>活動</th><th>內容</th></tr></thead><tbody>'
+      +c.rundown.map(function(r){
+          return '<tr><td class="t">'+esc(r.time)+'</td><td><b>'+esc(r.activity)+'</b></td><td>'+esc(r.detail)+'</td></tr>';
+        }).join('')
+      +'</tbody></table></div></div>'
+      +'<div class="kv"><b>教材準備</b><ul>'+c.materials.map(function(m){return '<li>'+esc(m)+'</li>';}).join('')+'</ul></div>'
+      +'<div class="kv"><b>學生產出</b><p style="margin:0">'+esc(c.output)+'</p></div>'
+      +'<div class="kv"><b>評分／講評</b><ul>'+c.assessment.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul></div>'
+      +'<div class="kv"><b>帶走的一招</b><p style="margin:0;font-weight:700;color:var(--red)">'+esc(c.takeaway)+'</p></div>'
+      +'<div class="row no-print" style="margin-top:18px"><button class="btn dark" id="dP">列印教案</button></div>';
+    $('#dlgIn').innerHTML=h;
+    $('#dlg').showModal();
+    $('#dX').onclick=function(){ $('#dlg').close(); };
+    $('#dP').onclick=function(){ window.print(); };
+  }
+
+  /* ---------- 寫作教室 ---------- */
+  function renderWrite(){
+    $('#writeBox').innerHTML=WRITE.map(function(w){
+      return '<div class="card"><span class="pill red">'+esc(w['for'])+'</span>'
+        +'<h3 style="margin-top:8px;font-size:16px">'+esc(w.name)+'</h3>'
+        +'<ol style="margin:10px 0 0;padding-left:20px">'
+        +w.steps.map(function(s){return '<li style="margin:3px 0">'+esc(s)+'</li>';}).join('')
+        +'</ol>'
+        +'<p class="exp" style="margin-top:12px"><b>常見死法：</b>'+esc(w.trap)+'</p></div>';
+    }).join('');
+  }
+
+  /* ---------- 語文常識 ---------- */
+  function tbl(title,head,rows){
+    return '<details class="unit" style="margin-bottom:10px"><summary><span class="un">表</span><span class="ut">'
+      +'<b>'+esc(title)+'</b><span>共 '+rows.length+' 條</span></span></summary><div class="body"><div class="tw"><table><thead><tr>'
+      +head.map(function(x){return '<th>'+esc(x)+'</th>';}).join('')+'</tr></thead><tbody>'
+      +rows.map(function(r){return '<tr>'+r.map(function(c,i){
+          return '<td'+(i===0?' style="white-space:nowrap;font-weight:700"':'')+'>'+esc(c)+'</td>';
+        }).join('')+'</tr>';}).join('')
+      +'</tbody></table></div></div></details>';
+  }
+  function renderRef(){
+    $('#refBox').innerHTML=
+      tbl('修辭格 15 種','修辭 定義 例句'.split(' '),RHET)
+      +tbl('文言虛字 16 個','虛字 常見用法 例句'.split(' '),XUZI)
+      +tbl('六書','類別 說明 例字'.split(' '),LIUSHU)
+      +tbl('標點符號 10 種','符號 用法 例句'.split(' '),PUNC);
+  }
+
+  /* ---------- 題庫工具 ---------- */
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function levels(){var s={},o=[];QBANK.forEach(function(q){if(!s[q.level]){s[q.level]=1;o.push(q.level);}});return o;}
+  function topics(lv){var s={},o=[];QBANK.forEach(function(q){if((lv==='全部'||q.level===lv)&&!s[q.topic]){s[q.topic]=1;o.push(q.topic);}});return o;}
+  function pool(lv,tp){return QBANK.filter(function(q){
+    return (lv==='全部'||q.level===lv)&&(tp==='全部'||q.topic===tp);});}
+
+  /* ---------- 隨堂測驗 ---------- */
+  var qs=[],qi=0,score=0;
+  function fillSel(){
+    var lv=levels();
+    $('#qLv').innerHTML=lv.map(function(l){return '<option>'+esc(l)+'</option>';}).join('');
+    $('#eLv').innerHTML=lv.map(function(l){return '<option>'+esc(l)+'</option>';}).join('');
+    fillTp();
+    $('#qLv').onchange=fillTp;
+  }
+  function fillTp(){
+    var t=['全部'].concat(topics($('#qLv').value));
+    $('#qTp').innerHTML=t.map(function(x){return '<option>'+esc(x)+'</option>';}).join('');
+  }
+  function newQuiz(){
+    var p=pool($('#qLv').value,$('#qTp').value);
+    if(!p.length){ $('#qBox').innerHTML='<p class="muted">這個組合目前沒有題目。</p>'; return; }
+    qs=shuffle(p.slice()).slice(0,10); qi=0; score=0; showQ();
+  }
+  function showQ(){
+    if(qi>=qs.length){
+      $('#qBox').innerHTML='<h3 style="font-size:17px">這一輪結束</h3>'
+        +'<p class="sub">答對 <b style="color:var(--red);font-size:20px">'+score+'</b> / '+qs.length+' 題</p>'
+        +'<button class="btn" id="qAgain" style="margin-top:8px">再來一輪</button>';
+      $('#qAgain').onclick=newQuiz; return;
+    }
+    var q=qs[qi];
+    var h='<p class="muted">第 '+(qi+1)+' / '+qs.length+' 題　·　'+esc(q.level)+'　·　'+esc(q.topic)+'</p>'
+      +'<h3 style="font-size:16px;margin:6px 0 10px;line-height:1.8">'+esc(q.q)+'</h3><div id="qOpts">'
+      +q.options.map(function(o,i){return '<button class="opt" data-i="'+i+'">'
+          +'<b style="color:var(--muted);margin-right:8px">'+'ABCD'[i]+'</b>'+esc(o)+'</button>';}).join('')
+      +'</div><div id="qAfter"></div>';
+    $('#qBox').innerHTML=h;
+    Array.prototype.forEach.call($('#qOpts').children,function(b){
+      b.onclick=function(){ answer(+b.dataset.i); };
+    });
+  }
+  function answer(i){
+    var q=qs[qi];
+    Array.prototype.forEach.call($('#qOpts').children,function(b,bi){
+      b.disabled=true;
+      if(bi===q.ans) b.classList.add('ok');
+      else if(bi===i) b.classList.add('no');
+    });
+    if(i===q.ans) score++;
+    $('#qAfter').innerHTML='<div class="exp"><b>'+(i===q.ans?'答對了。':'正確答案是 '+'ABCD'[q.ans]+'。')+'</b> '+esc(q.exp)+'</div>'
+      +'<button class="btn" id="qNext" style="margin-top:12px">下一題</button>';
+    $('#qNext').onclick=function(){ qi++; showQ(); };
+  }
+
+  /* ---------- 考卷產生器 ---------- */
+  var WTOPICS={
+    '國小':['我最難忘的一天','那一次，我學會了……','如果我有魔法'],
+    '國中':['一堂重要的課','我曾經誤會了一個人','窗外','那雙手'],
+    '高中':['論「慢」的價值（知性題）','談網路時代的孤獨（知性題）','記一段被時間改變的關係（情意題）','失去之後（情意題）']
+  };
+  function makeExam(){
+    var lv=$('#eLv').value, n=Math.max(5,Math.min(30,+$('#eN').value||15));
+    var p=pool(lv,'全部');
+    if(p.length<3){ $('#eBox').innerHTML='<p class="muted">題目不足。</p>'; return; }
+    var pick=shuffle(p.slice()).slice(0,Math.min(n,p.length));
+    var wq=(WTOPICS[lv]||WTOPICS['國中']);
+    var topic=wq[Math.floor(Math.random()*wq.length)];
+    var want=$('#eW').value==='1';
+    var d=new Date();
+    var h='<div class="paper prt"><h3>國語文測驗卷 · '+esc(lv)+'</h3>'
+      +'<div class="ph">姓名：____________　班級：__________　日期：'+d.getFullYear()+'／'+(d.getMonth()+1)+'／'+d.getDate()
+      +'　｜　選擇題 '+pick.length+' 題，每題 '+(want?4:Math.round(100/pick.length))+' 分'+(want?'　＋　作文 '+(100-pick.length*4)+' 分':'')+'</div>'
+      +'<b>一、單選題</b><ol>';
+    pick.forEach(function(q){
+      h+='<li>'+esc(q.q)+'<div class="os">'
+        +q.options.map(function(o,i){return '<div>('+'ABCD'[i]+') '+esc(o)+'</div>';}).join('')
+        +'</div></li>';
+    });
+    h+='</ol>';
+    if(want){
+      h+='<b>二、寫作測驗</b><p style="margin:6px 0 4px">題目：<b>'+esc(topic)+'</b>　（'
+        +(lv==='國小'?'不少於 300 字':(lv==='國中'?'不少於 500 字':'不少於 600 字'))+'）</p>';
+      for(var i=0;i<8;i++) h+='<div class="wl"></div>';
+      h+='<p style="font-size:12px;color:#777">（作答請另用稿紙）</p>';
+    }
+    h+='<div class="key"><b>解答與解析</b><ol>'
+      +pick.map(function(q){return '<li><b>('+'ABCD'[q.ans]+')</b> '+esc(q.exp)+'</li>';}).join('')
+      +'</ol></div></div>';
+    $('#eBox').innerHTML=h;
+    $('#ePrint').disabled=false;
+  }
+
+  /* ---------- 備份 ---------- */
+  function backupMsg(){
+    var n=Object.keys(done).length;
+    $('#bMsg').textContent='已完成單元：'+n+' / '+TOTAL;
+  }
+  $('#bOut').onclick=function(){
+    var t=$('#bTxt'); t.style.display='block';
+    t.value=JSON.stringify({v:1,role:role,grade:cur,done:done});
+    t.select();
+    $('#bMsg').textContent='已產生備份字串，整段複製起來存好（換裝置時貼回「匯入進度」）。';
+  };
+  $('#bIn').onclick=function(){
+    var t=$('#bTxt');
+    if(t.style.display==='none'||!t.value){
+      t.style.display='block'; t.value=''; t.placeholder='把備份字串貼進來，再按一次「匯入進度」。'; t.focus();
+      $('#bMsg').textContent='請貼上備份字串，然後再按一次「匯入進度」。'; return;
+    }
+    try{
+      var o=JSON.parse(t.value);
+      done=o.done||{}; S.set('zh.done',done);
+      if(typeof o.grade==='number'){ cur=o.grade; S.set('zh.grade',cur); }
+      if(o.role){ setRole(o.role); }
+      renderPick(); renderGrade(); renderMap(); backupMsg();
+      $('#bMsg').textContent='匯入成功，進度已還原。';
+    }catch(e){ $('#bMsg').textContent='匯入失敗：字串格式不對，請確認整段都貼進來了。'; }
+  };
+  $('#bClr').onclick=function(){
+    if(!confirm('確定要清除全部進度嗎？這個動作無法復原。')) return;
+    done={}; S.set('zh.done',done); renderPick(); renderGrade(); renderMap(); backupMsg();
+    $('#bMsg').textContent='進度已清除。';
+  };
+
+  /* ---------- init ---------- */
+  setRole(role);
+  renderMap(); renderPick(); renderGrade(); renderSig(); renderWrite(); renderRef();
+  if(QBANK.length){ fillSel(); $('#qNew').onclick=newQuiz; $('#eGo').onclick=makeExam; $('#ePrint').onclick=function(){window.print();}; }
+  else {
+    $('#qBox').innerHTML='<p class="muted">題庫尚未載入。</p>';
+    $('#eGo').disabled=true;
+  }
+  backupMsg();
+  $('#dlg').addEventListener('click',function(e){ if(e.target===$('#dlg')) $('#dlg').close(); });
+})();
+</script>
+</body>
+</html>
