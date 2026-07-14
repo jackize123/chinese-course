@@ -1,0 +1,14 @@
+{
+  "name": "chinese-course",
+  "version": "1.0.0",
+  "description": "國語文課程地圖 · 小一到高三",
+  "private": true,
+  "scripts": {
+    "build:ebook": "node tools/build-ebook.js",
+    "build:pdf": "node tools/build-pdf.js"
+  },
+  "devDependencies": {
+    "fast-xml-parser": "^4.5.0",
+    "jszip": "^3.10.1"
+  }
+}

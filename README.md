@@ -20,11 +20,25 @@
 - **隨堂測驗**：136 題單選題，依難度與題型抽題，答完即看解析。
 - **考卷產生器**：依難度隨機出卷，含作文題與解答卷，可列印或存成 PDF。
 - **進度備份**：學習進度存於瀏覽器 localStorage，可匯出／匯入。
-- **電子書**：`國語文課程手冊.pdf`（可列印；含可點跳轉目錄與章節書籤）與 `國語文課程手冊.epub`（手機建議用這個：文字自動重排、課程流程改為堆疊卡片不會截斷，目錄可跳轉），內容含課程總覽、12 年級大綱、16 堂特色課程教案、寫作教室與主題靈感庫。
+- **電子書**：`國語文課程手冊.epub`（手機建議用這個：文字自動重排）與 `國語文課程手冊.pdf`（可列印；含可點跳轉目錄）。內容含課程總覽、注音教室、12 年級大綱與 **480 題每週練習**、16 堂特色課程教案、寫作教室、語文常識庫與主題靈感庫，並內嵌教學 SVG 圖解（聲調曲線、拼音結構、六書、起承轉合、各學段章名橫幅）。**由 `index.html` 的資料自動產生，內容與線上版同步。**
 
 ## 修改方式
 
 直接編輯 `index.html`（資料以 JavaScript 陣列內嵌在檔案底部的 `<script>` 中），commit 後 push，GitHub Pages 幾分鐘後自動更新。
+
+## 重新產生電子書
+
+電子書不是手工維護，而是由 `tools/build-ebook.js` 直接讀 `index.html` 的資料陣列產生，改完網站內容後重跑即可讓 EPUB／PDF 跟著更新。
+
+```bash
+npm install                 # 安裝建置相依套件（jszip、fast-xml-parser）
+npm run build:ebook         # 產生 國語文課程手冊.epub（會驗證 XML 與 EPUB3 結構）
+npm run build:pdf           # 產生 國語文課程手冊.pdf（需已安裝 Microsoft Edge 或 Chrome）
+```
+
+- 教學 SVG 圖解定義在 `tools/diagrams.js`。
+- PDF 透過 Edge／Chrome 的無頭列印產生（`--headless --print-to-pdf`），含可點的目錄連結。
+- 上架電子書商店（Apple Books／Google Play 圖書）前，建議另跑官方 [EPUBCheck](https://www.w3.org/publishing/epubcheck/) 做正式驗證，並向國家圖書館申請免費 ISBN。
 
 ## 發音音檔的來源與授權
 
